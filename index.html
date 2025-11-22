@@ -23,6 +23,7 @@
                 extend: {
                     colors: {
                         'neon-pink': '#FF69B4',
+                        'zinc-950': '#09090b',
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
@@ -111,6 +112,20 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
+        /* Custom Scrollbar */
+        #main-view::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        #main-view::-webkit-scrollbar-track {
+            background: #18181b; 
+        }
+        #main-view::-webkit-scrollbar-thumb {
+            background: #FF69B4; 
+            border-radius: 4px;
+        }
+
 
         /* Animations */
         @keyframes fadeIn {
@@ -131,16 +146,12 @@
         }
 
         /* Utilities */
-        .text-shadow-neon {
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-        }
-        
         .selection-pink::selection {
             background-color: #FF69B4;
             color: black;
         }
 
-        /* --- VIEW SPECIFIC SCROLLBARS --- */
+        /* --- VIEW SPECIFIC SCROLLBARS & BASES --- */
         #advantages-view,
         #preparation-view,
         #renaissance-view,
@@ -148,7 +159,10 @@
         #jury-view,
         #panama-view,
         #day1-view,
-        #city-girl-view {
+        #city-girl-view,
+        #meta-prep-view,
+        #volatility-matrix-view,
+        #reality-tv-view { /* Added new view ID */
             display: none;
             position: absolute;
             top: 0;
@@ -160,10 +174,11 @@
             background-color: #09090b; /* Zinc-950 */
             color: #e4e4e7;
             font-family: 'Roboto', sans-serif;
+            animation: fadeIn 0.3s ease-out; /* Add animation to custom views */
         }
-
-        #panama-view {
-            background-color: #020401; /* Deep Jungle Black */
+        
+        #city-girl-view {
+            background-color: #09090b; /* Changed to dark mode for consistency, updating text colors in HTML below */
         }
 
         /* Custom Scrollbar for Views */
@@ -174,7 +189,10 @@
         #jury-view::-webkit-scrollbar,
         #panama-view::-webkit-scrollbar,
         #day1-view::-webkit-scrollbar,
-        #city-girl-view::-webkit-scrollbar {
+        #city-girl-view::-webkit-scrollbar,
+        #meta-prep-view::-webkit-scrollbar,
+        #volatility-matrix-view::-webkit-scrollbar,
+        #reality-tv-view::-webkit-scrollbar { /* Added new view ID */
             width: 8px;
         }
         #advantages-view::-webkit-scrollbar-track,
@@ -184,7 +202,10 @@
         #jury-view::-webkit-scrollbar-track,
         #panama-view::-webkit-scrollbar-track,
         #day1-view::-webkit-scrollbar-track,
-        #city-girl-view::-webkit-scrollbar-track {
+        #city-girl-view::-webkit-scrollbar-track,
+        #meta-prep-view::-webkit-scrollbar-track,
+        #volatility-matrix-view::-webkit-scrollbar-track,
+        #reality-tv-view::-webkit-scrollbar-track { /* Added new view ID */
             background: #18181b; /* Zinc-900 */
         }
         #advantages-view::-webkit-scrollbar-thumb,
@@ -194,7 +215,10 @@
         #jury-view::-webkit-scrollbar-thumb,
         #panama-view::-webkit-scrollbar-thumb,
         #day1-view::-webkit-scrollbar-thumb,
-        #city-girl-view::-webkit-scrollbar-thumb {
+        #city-girl-view::-webkit-scrollbar-thumb,
+        #meta-prep-view::-webkit-scrollbar-thumb,
+        #volatility-matrix-view::-webkit-scrollbar-thumb,
+        #reality-tv-view::-webkit-scrollbar-thumb { /* Added new view ID */
             background: #FF69B4; /* Neon Pink */
             border-radius: 4px;
         }
@@ -205,7 +229,11 @@
         #ftc-view h1, #ftc-view h2, #ftc-view h3, #ftc-view h4,
         #jury-view h1, #jury-view h2, #jury-view h3,
         #panama-view h1, #panama-view h2, #panama-view h3,
-        #day1-view h1, #day1-view h2, #day1-view h3 {
+        #day1-view h1, #day1-view h2, #day1-view h3,
+        #renaissance-view h1, #renaissance-view h2, #renaissance-view h3,
+        #meta-prep-view h1, #meta-prep-view h2, #meta-prep-view h3,
+        #volatility-matrix-view h1, #volatility-matrix-view h2, #volatility-matrix-view h3,
+        #reality-tv-view h1, #reality-tv-view h2, #reality-tv-view h3 { /* Added new view ID */
             font-family: 'Oswald', sans-serif;
         }
 
@@ -217,18 +245,17 @@
             height: 350px;
             max-height: 400px;
         }
+        
+        /* Specific dark mode styles for City Girl content structure */
+        #city-girl-view .dark-card {
+            background-color: #18181b; /* Zinc-900 */
+            color: #e4e4e7; /* Zinc-200 */
+            border: 1px solid #3f3f46; /* Zinc-700 */
+        }
+        #city-girl-view .dark-header {
+            color: #FF69B4; /* Neon Pink */
+        }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
-  }
-}
-</script>
 </head>
 <body class="selection-pink">
 
@@ -238,7 +265,7 @@
         <!-- 1. HERO SECTION -->
         <section id="hero" class="bg-black">
             <div class="z-10 flex flex-col items-center text-center space-y-8 max-w-5xl">
-                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
+                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9] font-oswald">
                     Preparation <span class="text-neon-pink block md:inline">Handbook</span>
                 </h1>
                 
@@ -251,7 +278,7 @@
                     <!-- Landscape Image Container -->
                     <div class="relative w-96 h-64 md:w-[600px] md:h-[400px] rounded-xl border-4 border-white bg-black overflow-hidden shadow-[0_0_20px_rgba(255,105,180,0.3)]">
                         <!-- 
-                           YOUR PHOTO CONFIGURATION
+                            YOUR PHOTO CONFIGURATION
                         -->
                         <img 
                             id="hero-image"
@@ -272,7 +299,7 @@
         <!-- 2. TIMELINE SECTION -->
         <section id="timeline" class="bg-zinc-950 border-t border-zinc-900">
             <div class="flex flex-col w-full h-full justify-center">
-                <h2 class="text-4xl font-bold text-white mb-12 uppercase tracking-wider px-4 md:px-0 border-l-4 border-neon-pink pl-4 ml-4 md:ml-0">
+                <h2 class="text-4xl font-bold text-white mb-12 uppercase tracking-wider px-4 md:px-0 font-oswald border-l-4 border-neon-pink pl-4 ml-4 md:ml-0">
                     The <span class="text-neon-pink">Journey</span>
                 </h2>
                 
@@ -293,12 +320,12 @@
         <section id="content-hubs" class="bg-black">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl h-full md:h-[70vh]">
                 <!-- Card 1 -->
-                <button onclick="openTopic('pregame')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none">
+                <button onclick="openTopic('pregame')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     
                     <div class="relative h-full flex flex-col justify-end p-8 md:p-12 group-hover:translate-y-[-10px] transition-transform duration-500">
-                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors">
+                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
                             Pregame <br/> Guidelines
                         </h3>
                         <div class="h-1 w-12 bg-neon-pink mt-6 group-hover:w-full transition-all duration-700"></div>
@@ -309,12 +336,12 @@
                 </button>
 
                 <!-- Card 2 -->
-                <button onclick="openTopic('meta')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none">
+                <button onclick="openTopic('meta')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     
                     <div class="relative h-full flex flex-col justify-end p-8 md:p-12 group-hover:translate-y-[-10px] transition-transform duration-500">
-                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors">
+                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
                             META <br/> GAME
                         </h3>
                         <div class="h-1 w-12 bg-neon-pink mt-6 group-hover:w-full transition-all duration-700"></div>
@@ -331,14 +358,21 @@
             <div class="relative w-full max-w-5xl h-full flex flex-col justify-center">
                 <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                     <svg viewBox="0 0 100 100" class="w-full h-full max-w-[80vh] max-h-[80vh] fill-none stroke-white stroke-1">
-                        <polygon points="50,100 0,0 100,0" />
+                        <!-- The Triangle -->
+                        <polygon points="50,10 5,90 95,90" />
+                        <!-- Outwit label near top left -->
+                        <text x="5" y="5" font-size="5" fill="#FF69B4" class="font-oswald uppercase tracking-widest">Outwit</text>
+                        <!-- Outplay label near top right -->
+                        <text x="95" y="5" font-size="5" fill="#FF69B4" text-anchor="end" class="font-oswald uppercase tracking-widest">Outplay</text>
+                        <!-- Outlast label near bottom center -->
+                        <text x="50" y="98" font-size="5" fill="#FF69B4" text-anchor="middle" class="font-oswald uppercase tracking-widest">Outlast</text>
                     </svg>
                 </div>
 
                 <!-- Top Row -->
                 <div class="flex flex-col md:flex-row justify-between items-center w-full flex-1 md:items-start pt-12 md:px-12 z-10">
                     <button onclick="openTopic('outwit')" class="group cursor-pointer mb-12 md:mb-0 text-center md:text-left focus:outline-none">
-                        <h2 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 group-hover:from-neon-pink group-hover:to-pink-600 transition-all duration-300 uppercase tracking-tighter">
+                        <h2 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 group-hover:from-neon-pink group-hover:to-pink-600 transition-all duration-300 uppercase tracking-tighter font-oswald">
                             Outwit
                         </h2>
                         <p class="opacity-0 group-hover:opacity-100 transition-opacity text-neon-pink tracking-widest uppercase text-xs mt-2">
@@ -347,7 +381,7 @@
                     </button>
 
                     <button onclick="openTopic('outplay')" class="group cursor-pointer text-center md:text-right focus:outline-none">
-                        <h2 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 group-hover:from-neon-pink group-hover:to-pink-600 transition-all duration-300 uppercase tracking-tighter">
+                        <h2 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 group-hover:from-neon-pink group-hover:to-pink-600 transition-all duration-300 uppercase tracking-tighter font-oswald">
                             Outplay
                         </h2>
                         <p class="opacity-0 group-hover:opacity-100 transition-opacity text-neon-pink tracking-widest uppercase text-xs mt-2">
@@ -359,7 +393,7 @@
                 <!-- Bottom Row -->
                 <div class="flex justify-center items-end flex-1 pb-12 z-10">
                     <button onclick="openTopic('outlast')" class="group cursor-pointer text-center focus:outline-none">
-                        <h2 class="text-7xl md:text-9xl font-black text-white group-hover:text-neon-pink transition-colors duration-300 uppercase tracking-tighter transform group-hover:scale-110 transition-transform">
+                        <h2 class="text-7xl md:text-9xl font-black text-white group-hover:text-neon-pink transition-colors duration-300 uppercase tracking-tighter transform group-hover:scale-110 transition-transform font-oswald">
                             Outlast
                         </h2>
                         <p class="opacity-0 group-hover:opacity-100 transition-opacity text-neon-pink tracking-widest uppercase text-sm mt-4">
@@ -373,7 +407,7 @@
         <!-- 5. END GAME -->
         <section id="end-game" class="bg-black border-y border-neon-pink/20">
             <div class="relative z-10 mix-blend-difference">
-                <button onclick="openTopic('endgame')" class="text-[15vw] leading-none font-black text-white uppercase tracking-tighter text-center hover:text-neon-pink transition-colors duration-700 cursor-pointer select-none focus:outline-none">
+                <button onclick="openTopic('endgame')" class="text-[15vw] leading-none font-black text-white uppercase tracking-tighter text-center hover:text-neon-pink transition-colors duration-700 cursor-pointer select-none focus:outline-none font-oswald">
                     End<br/>Game
                 </button>
             </div>
@@ -388,7 +422,7 @@
         <section id="portfolios" class="bg-zinc-950">
             <div class="w-full max-w-7xl flex flex-col h-full py-12">
                 <div class="flex justify-between items-end mb-12 border-b border-zinc-800 pb-6 shrink-0">
-                    <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white">
+                    <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white font-oswald">
                         Player <span class="text-neon-pink">Portfolios</span>
                     </h2>
                     <span class="text-zinc-500 text-sm uppercase tracking-widest hidden md:block">Classified Data</span>
@@ -414,12 +448,12 @@
                     <span class="block w-8 h-px bg-zinc-600 group-hover:bg-neon-pink transition-colors"></span>
                     <span>Back to Handbook</span>
                 </button>
-                <div id="topic-header-id" class="text-neon-pink font-black text-xl tracking-tighter">SPR // TOPIC</div>
+                <div id="topic-header-id" class="text-neon-pink font-black text-xl tracking-tighter font-oswald">SPR // TOPIC</div>
             </header>
 
             <!-- Title Section -->
             <section id="topic-hero" class="mb-24 border-b border-zinc-800 pb-12 h-auto block !p-0">
-                <h1 id="topic-title" class="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
+                <h1 id="topic-title" class="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500 font-oswald">
                     TITLE
                 </h1>
                 <p id="topic-subtitle" class="text-xl md:text-2xl text-zinc-400 max-w-3xl font-light leading-relaxed">
@@ -439,14 +473,14 @@
 
             <!-- Footer -->
             <div class="mt-auto pt-12 border-t border-zinc-900 text-center">
-                <button onclick="closeTopic()" class="text-zinc-600 hover:text-white uppercase tracking-widest text-xs transition-colors py-4 px-8 border border-zinc-900 hover:border-zinc-700 focus:outline-none">
+                <button onclick="closeTopic()" class="text-zinc-600 hover:text-white uppercase tracking-widest text-xs transition-colors py-4 px-8 border border-zinc-900 hover:border-zinc-700 focus:outline-none rounded-lg">
                     Return to Main View
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- CUSTOM VIEW: ADVANTAGES ENCYCLOPEDIA -->
+    <!-- CUSTOM VIEW: ADVANTAGES ENCYCLOPEDIA (Outwit) -->
     <div id="advantages-view">
         <button onclick="closeAdvantagesPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Outwit
@@ -454,14 +488,14 @@
         <!-- Content loaded from previous state -->
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4"><span class="text-neon-pink">Survivor</span> Québec</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">Encyclopedia of Advantages & Twists</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Survivor</span> Québec</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Encyclopedia of Advantages & Twists</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-zinc-500 text-lg">A strategic analysis of the mechanics that defined Seasons 1, 2, and 3.</p>
             </div>
         </header>
 
         <main class="container mx-auto px-4 py-12">
-             <section class="mb-16">
+             <section class="mb-16 !h-auto">
                 <div class="flex flex-col items-center text-center mb-10">
                     <h2 class="text-4xl header-font text-white uppercase border-b-4 border-neon-pink pb-2 inline-block">Strategic Metagame</h2>
                     <p class="mt-4 text-zinc-400 max-w-3xl">Understanding not just <em>what</em> the twists are, but <em>how</em> they break the game.</p>
@@ -491,7 +525,7 @@
                     </div>
                 </div>
             </section>
-             <section>
+             <section class="!h-auto">
                 <div class="flex flex-col items-center text-center mb-12">
                     <h2 class="text-4xl header-font text-white uppercase border-b-4 border-neon-pink pb-2 inline-block">Advantage Database</h2>
                     <p class="mt-4 text-zinc-400">Detailed mechanics and strategic implications for every major twist.</p>
@@ -502,7 +536,7 @@
                     <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
                         <div class="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
                             <h3 class="text-xl font-bold">Standard Idol</h3>
-                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">Seasons 1, 2, 3</span>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S1, 2, 3</span>
                         </div>
                         <div class="p-6">
                             <div class="mb-4">
@@ -518,7 +552,7 @@
                     <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
                         <div class="bg-zinc-900 text-white p-4 flex justify-between items-center border-b border-zinc-800">
                             <h3 class="text-xl font-bold">Redemption Island</h3>
-                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">Season 1</span>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S1</span>
                         </div>
                         <div class="p-6">
                             <div class="mb-4">
@@ -531,10 +565,10 @@
                             </div>
                         </div>
                     </div>
-                     <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
                         <div class="bg-zinc-900 text-white p-4 flex justify-between items-center border-b border-zinc-800">
                             <h3 class="text-xl font-bold">Exile (Edge)</h3>
-                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">Season 2</span>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S2</span>
                         </div>
                         <div class="p-6">
                             <div class="mb-4">
@@ -547,12 +581,126 @@
                             </div>
                         </div>
                     </div>
+                     <!-- NEW CARDS START HERE -->
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">The Store (Magasin)</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S2</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Players spend fire tokens/currency on food or game advantages.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">Creates a "Resource Economy." Historically, purchasing food fueled challenge beasts more effectively than buying minor advantages.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-zinc-900 text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Safety Without Power</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S2</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Player leaves Tribal Council immediately; cannot vote or be voted for.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">The ultimate defensive bailout. Perfect for a player who knows they are the target but lacks an idol or numbers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Linked Destinies</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S3</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Players paired up; pairs share one vote and suffer double elimination.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">High Variance. Forces cooperation with enemies. Can be used to snipe strong players by targeting their weaker partner.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-zinc-900 text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Player Steal</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S3</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Winning tribe takes the "voted out" player from the losing tribe.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">Weaponizes the elimination vote. Turns a victim into a defector, immediately shifting tribal power dynamics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Thrown Hourglass</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S3</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Reverses the outcome of an immunity challenge for a target group.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">Removes "earned" safety, creating immense bitterness. A dangerous tool that often backfires via jury management.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-zinc-900 text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Extra Vote</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S3</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Allows a player to cast a second ballot at Tribal Council.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">Critical in the small tribes of Season 3 (3-tribe format) where one vote swings the majority.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 border border-zinc-800">
+                        <div class="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
+                            <h3 class="text-xl font-bold">Tribal Raid</h3>
+                            <span class="bg-neon-pink text-black text-xs font-bold px-2 py-1 rounded uppercase">S2</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="text-sm font-bold text-neon-pink uppercase tracking-wide mb-1">Mechanism</h4>
+                                <p class="text-zinc-300">Winners loot the losers' camp (Fire, Tarps, Food).</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-zinc-500 uppercase tracking-wide mb-1">Strategic Implication</h4>
+                                <p class="text-zinc-400 text-sm leading-relaxed">Psychological warfare. Demoralizes the enemy and physically weakens them, creating a snowball effect for future challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- NEW CARDS END HERE -->
                 </div>
-             </section>
+            </section>
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: PREPARATION PLAYBOOK -->
+    <!-- CUSTOM VIEW: PREPARATION PLAYBOOK (Pregame) -->
     <div id="preparation-view">
         <button onclick="closePreparationPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Pregame
@@ -560,14 +708,14 @@
         
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4"><span class="text-neon-pink">Survivor</span> Prep Playbook</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">Contestant-Specific Preparation Guide</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Survivor</span> Prep Playbook</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Contestant-Specific Preparation Guide</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-zinc-500 text-lg">A clean and organized guide detailing specific preparation strategies from Survivor USA and Survivor Québec contestants.</p>
             </div>
         </header>
         
         <main class="container mx-auto px-4 py-12">
-             <section id="andre" class="mb-16">
+             <section id="andre" class="mb-16 !h-auto">
                 <h2 class="text-4xl header-font text-white uppercase border-b-4 border-neon-pink pb-2 mb-10 inline-block">André (Survivor Québec 2)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     <div class="bg-zinc-950 border border-zinc-800 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300">
@@ -595,16 +743,17 @@
                         </div>
                     </div>
                 </div>
+                <!-- REMOVED: Strategic Deep Dive content was here. It's now in meta-prep-view -->
             </section>
 
-             <section id="parvati" class="mb-16">
+             <section id="parvati" class="mb-16 !h-auto">
                 <h2 class="text-4xl header-font text-white uppercase border-b-4 border-neon-pink pb-2 mb-10 inline-block">Parvati Shallow (Legend)</h2>
                 <div class="bg-zinc-950 border border-zinc-800 rounded-xl shadow-lg overflow-hidden p-8 md:p-12">
                     <div class="prose prose-invert prose-zinc max-w-none">
                         <p class="text-zinc-300 mb-6 leading-relaxed text-lg">
                             Parvati Shallow's preparation for competing on Survivor involved a combination of strategic intellectual training, meticulous attention to social archetypes, and a continuously evolving focus on functional yet character-defining clothing.
                         </p>
-                        <h4 class="text-2xl font-bold text-white mb-4 mt-8 border-l-4 border-neon-pink pl-4">Strategic and Intellectual Preparation</h4>
+                        <h4 class="text-2xl font-bold text-white mb-4 mt-8 border-l-4 border-neon-pink pl-4 font-oswald">Strategic and Intellectual Preparation</h4>
                         <p class="text-zinc-300 mb-4">Parvati Shallow is noted for preparing for the social elements of the game by treating it as a psychological warfare test.</p>
                         <ul class="list-none space-y-4 text-zinc-300 mb-8">
                             <li class="pl-4 border-l-2 border-zinc-800 hover:border-neon-pink transition-colors">
@@ -620,7 +769,7 @@
                                 One of the most essential skills Parvati demonstrated was unparalleled adaptability, shifting effortlessly between alliances and adapting her social game depending on whom she was working with at any given moment. She used her charm and social savviness to outwit her opponents.
                             </li>
                         </ul>
-                        <h4 class="text-2xl font-bold text-white mb-4 mt-8 border-l-4 border-neon-pink pl-4">Wardrobe and Character Preparation</h4>
+                        <h4 class="text-2xl font-bold text-white mb-4 mt-8 border-l-4 border-neon-pink pl-4 font-oswald">Wardrobe and Character Preparation</h4>
                         <p class="text-zinc-300 mb-6 leading-relaxed">
                             Parvati's clothing was a critical part of her strategy, tied directly to the "flirty persona" she cultivated in the game. The choice of wardrobe in Survivor is highly controlled by production, which actively seeks pieces to reinforce pre-designed visual archetypes.
                         </p>
@@ -646,7 +795,7 @@
                 </div>
             </section>
 
-             <section id="justine" class="mb-16">
+             <section id="justine" class="mb-16 !h-auto">
                 <h2 class="text-4xl header-font text-white uppercase border-b-4 border-neon-pink pb-2 mb-10 inline-block">Justine (Survivor Québec 3)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     <div class="bg-zinc-950 border border-zinc-800 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300">
@@ -692,15 +841,253 @@
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: RENAISSANCE -->
+    <!-- CUSTOM VIEW: META STRATEGY DEEP DIVE (Pregame) -->
+    <div id="meta-prep-view">
+        <button onclick="closeMetaPrepPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
+            &larr; Back to Pregame
+        </button>
+        
+        <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Meta</span> Strategy Deep Dive</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Advanced Strategic Principles for the Modern Game</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-zinc-500 text-lg">A set of competitive, high-level tactical guidelines focused on optimizing social and strategic output while managing threat levels.</p>
+            </div>
+        </header>
+        
+        <main class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto p-8 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl">
+                <h3 class="text-3xl font-oswald text-neon-pink uppercase mb-8 border-b-2 border-zinc-700 pb-2">I. Strategic & Intellectual Preparation</h3>
+                <ol class="list-decimal list-inside space-y-6 text-zinc-300 ml-4">
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Read for Strategic Depth:</strong> Read essential pre-game material such as <em class="text-neon-pink">The 48 Laws of Power</em> by Robert Greene to prepare for the "social hack elements" and psychological warfare of the game.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Master Adaptability:</strong> Cultivate unparalleled adaptability; the ability to shift alliances and strategic positioning effortlessly is an essential skill.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Plan the Ending First (Backwards Induction):</strong> Use this principle to plan your entire game around the Final Tribal Council (FTC), ensuring you have a simple, clear narrative ready to justify your strategic actions to the jury.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Own Your Strategy (FTC Rule):</strong> At FTC, avoid giving "sob stories" about how difficult it was to vote someone out. Instead, own your game and tell the jury why you voted them out (e.g., "I voted you out because I knew I couldn't beat you").
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Build a Résumé:</strong> Focus on making highly visible, aggressive "big moves" to build a compelling résumé for the jury, recognizing that merely trying to "not lose" is destined to fail in the modern meta game.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Find a "Meat Shield":</strong> Align with a dominant or obvious threat early on. This "Meat Shield" strategy diverts strategic attention away from your own subtle maneuvers. 
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Minimize Visible Utility:</strong> Strategically embrace the “Anybody but me” philosophy by minimizing visible physical exertion in camp, allowing you to focus entirely on social maneuvering and reducing your threat target.
+                    </li>
+                </ol>
+            </div>
+            <div class="mt-12 text-center text-zinc-600 text-xs uppercase tracking-widest">
+                End of Strategic Playbook
+            </div>
+        </main>
+    </div>
+
+    <!-- CUSTOM VIEW: REALITIES OF REALITY TV (Meta) -->
+    <div id="reality-tv-view">
+        <button onclick="closeRealityTVPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
+            &larr; Back to Meta Game
+        </button>
+        
+        <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald">Realities of Reality TV</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Navigating the Invisible Crucible: Expanding Psychological & Cognitive Resilience</h2>
+            </div>
+        </header>
+        
+        <main class="container mx-auto px-4 py-12 font-roboto text-zinc-300 max-w-4xl">
+            <p class="text-lg leading-relaxed mb-8 border-l-4 border-neon-pink pl-6 py-2 bg-zinc-900/50 rounded-r-lg">
+                The competitive reality TV environment is an intentional stress factory, calibrated to induce mental fatigue and strategic errors. Your focus must be on preserving cognitive capital and treating all interactions, even those with production, as sources of strategic intelligence.
+            </p>
+
+            <section class="mb-12">
+                <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-4 border-zinc-800 pb-2"><span class="text-neon-pink">A.</span> The Deprivation Crucible: Managing Cognitive Collapse</h3>
+                <p class="mb-4 leading-relaxed">
+                    The game is designed to degrade your ability to think clearly by sustaining chronic duress. Prepare to function at a high strategic level despite severe psychological and physical stress. [Image of psychological stress management diagram]
+                </p>
+                <ul class="list-disc pl-6 space-y-4 text-zinc-300">
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Anticipate the "100% On" Mentality:</strong> You must be strategically and socially "on" at all times, which is mentally exhausting. Prepare for the onset of intense paranoia and deep psychological distress. This is not a personal failure; it is a direct consequence of the environment.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">The Calibrated Deficit:</strong> Recognize that unrelenting hunger, sleep deprivation, and physical exhaustion are specifically calibrated by production to induce strategic errors. Your primary energy management task is to conserve cognitive ability to resist this programming.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Buffer Decision Fatigue:</strong> Under severe caloric restriction, every small decision becomes taxing. Practice reducing daily decision points now (e.g., routines, wardrobe choices) so that you can dedicate limited cognitive bandwidth entirely to social and strategic analysis.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Practice Mental Discipline:</strong> Develop a mental mechanism (a mantra, a distraction, or a grounding technique) to briefly step out of the paranoid headspace. The ability to reset your thoughts quickly is essential for clear voting decisions and challenge focus.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-12">
+                <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-4 border-zinc-800 pb-2"><span class="text-neon-pink">B.</span> Mastering the Confessional as Intelligence</h3>
+                <p class="mb-4 leading-relaxed">
+                    The confessional is not merely a place to vent; it is a highly directed interview where you can extract valuable, hidden intelligence about the game narrative. 
+                </p>
+                <ul class="list-disc pl-6 space-y-4 text-zinc-300">
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Confessionals Are Guided:</strong> Recognize that confessional producers are utilizing sophisticated questioning tactics (e.g., loaded questions, hypothetical scenarios) designed to guide your thought process. They want you to articulate a compelling narrative.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Use Questions as Intelligence:</strong> Treat the producers' questions as a form of strategic intelligence. Their focus often hints at:
+                        <ul class="list-none pl-4 pt-2 text-zinc-400 text-sm italic">
+                            <li>What production knows (i.e., they have footage of a secret alliance).</li>
+                            <li>What other players are saying about you (i.e., you are being perceived as a threat or as lazy).</li>
+                            <li>The emerging storyline (i.e., which rivalry production hopes to highlight).</li>
+                        </ul>
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Control the Narrative:</strong> Use the confessional time to practice and solidify your Final Tribal Council (FTC) narrative (The "Why" and "How" of your game). If the producers steer you off-message, strategically pivot the conversation back to your winning résumé.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-12">
+                <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-4 border-zinc-800 pb-2"><span class="text-neon-pink">C.</span> The Vulnerability Paradox and Social Boundaries</h3>
+                <p class="mb-4 leading-relaxed">
+                    While human connection is vital, revealing too much personal vulnerability can backfire dramatically in a high-stakes competitive environment.
+                </p>
+                <ul class="list-disc pl-6 space-y-4 text-zinc-300">
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Avoid the Vulnerability Paradox:</strong> Under the extreme stress of deprivation, resist the urge to "trauma dump" or overshare deep, sensitive personal backstories with tribemates.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Misinterpretation Risk:</strong> While this vulnerability is intended to build genuine rapport, it is often misinterpreted by tribemates and potential jurors as a manipulative tactic used solely to garner sympathy, leading to an emotional backlash and potential targeting.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Maintain Social Boundaries:</strong> Focus on building rapport through low-stakes, high-utility social engagement (e.g., sharing anecdotes, assisting with chores) rather than deep emotional confessions.
+                    </li>
+                    <li class="leading-relaxed">
+                        <strong class="text-white block mb-1">Keep Your Head on a Swivel:</strong> Psychological distress will degrade your ability to discern genuine human connection from strategic deception. Assume that every shared confidence is a piece of information that can and will be used against you at the next Tribal Council or the FTC.
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+    
+    <!-- CUSTOM VIEW: VOLATILITY MATRIX (Outwit) -->
+    <div id="volatility-matrix-view">
+        <button onclick="closeVolatilityMatrixPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
+            &larr; Back to Outwit
+        </button>
+        
+        <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald">The <span class="text-neon-pink">Volatility</span> Matrix</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Contingency Planning for SQ Twists</h2>
+            </div>
+        </header>
+        
+        <main class="container mx-auto px-4 py-12 font-roboto text-zinc-300 max-w-5xl">
+            <div class="space-y-12">
+                <p class="text-lg leading-relaxed border-l-4 border-neon-pink pl-6 py-2 bg-zinc-900/50 rounded-r-lg">
+                    Survivor Québec loves to hand players a beautifully wrapped gift that explodes in their faces. Mandatory duos, tribal kidnappings, vote steals, forced swaps—this franchise treats stability like a piñata. Any player who clings too tightly to loyalty turns into sentimental driftwood.
+                    The Volatility Matrix is your map for staying lucid in that chaos. It’s a way of treating unpredictable twists not as threats but as temporary markets where leverage, flexibility, and emotional neutrality outperform loyalty-based strategy.
+                </p>
+
+                <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-4 border-zinc-800 pb-2">The Matrix: Four Quadrants of Québec Chaos</h3>
+                
+                <p class="mb-8">
+                    Imagine every twist pushes you toward combinations of two axes:
+                    <ul class="list-disc list-inside space-y-2 mt-4 ml-4">
+                        <li><strong class="text-neon-pink">Control vs. Exposure</strong> — Are you choosing or being chosen?</li>
+                        <li><strong class="text-neon-pink">Symmetry vs. Asymmetry</strong> — Does everyone get the same rulebook, or are you operating under a private handicap/advantage?</li>
+                    </ul>
+                </p>
+
+                
+                
+                <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="text-2xl font-oswald text-white mb-4 border-l-4 border-neon-pink pl-4">Quadrant I: High Control, Symmetric Conditions</h4>
+                    <p class="mb-4 text-zinc-400">The classic “everyone’s in this together” twist—think tribe swap with equal numbers or balanced duos.</p>
+                    <p class="leading-relaxed mb-4">
+                        Your job here is to treat people like investments: small, low-risk deposits. Nothing long-term, nothing sentimental. Gather information. Test trust with micro-asks. Build soft loyalty that costs nothing.
+                    </p>
+                    <p class="font-bold text-white leading-relaxed">
+                        This is the only quadrant where proactive alliance-building doesn’t mutate into long-term liability. Stay fluid but friendly.
+                    </p>
+                </div>
+
+                <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="text-2xl font-oswald text-white mb-4 border-l-4 border-neon-pink pl-4">Quadrant II: High Control, Asymmetric Advantage</h4>
+                    <p class="mb-4 text-zinc-400">This is the “you found the shiny thing, or you pick the duo” zone.</p>
+                    <p class="leading-relaxed mb-4">
+                        The danger is emotional gravity. If you show excitement, fear, guilt, or overthinking, you give away your leverage. Keep a calm, professorly vibe. Act like the advantage isn’t a bomb—just a tool.
+                    </p>
+                    <p class="font-bold text-white mb-2">Play it like a poker hand:</p>
+                    <ul class="list-disc list-inside space-y-1 ml-4 text-neon-pink">
+                        <li>Never reveal full information.</li>
+                        <li>Offer partial truth framed as generosity.</li>
+                        <li>Position yourself as a conduit, not a hoarder.</li>
+                    </ul>
+                    <p class="mt-4 italic text-zinc-500">People resent hoarders. They respect conduits.</p>
+                </div>
+
+                <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="text-2xl font-oswald text-white mb-4 border-l-4 border-neon-pink pl-4">Quadrant III: Low Control, Symmetric Chaos</h4>
+                    <p class="mb-4 text-zinc-400">Mandatory duos chosen for you. Random draws. Tribal swaps where someone else picks your fate.</p>
+                    <p class="leading-relaxed mb-4">
+                        This quadrant is all about psychological aikido. Everyone feels destabilized, so the person who radiates calm becomes the lighthouse. Don’t complain. Don’t panic. Don’t show preference.
+                    </p>
+                    <p class="font-bold text-white mb-2">Your social currency is simple:</p>
+                    <div class="bg-black p-3 rounded text-center text-neon-pink font-bold text-lg">
+                        “I can work with anyone.”
+                    </div>
+                    <p class="mt-4 italic text-zinc-500">Make that your brand identity. The person who’s universally flexible becomes the glue everyone reaches for.</p>
+                </div>
+
+                <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="text-2xl font-oswald text-white mb-4 border-l-4 border-neon-pink pl-4">Quadrant IV: Low Control, Asymmetric Punishment</h4>
+                    <p class="mb-4 text-zinc-400">The nightmare quadrant. You’re the one forced into a duo with someone no one trusts. You lose a vote. You get isolated. You get kidnapped.</p>
+                    <p class="leading-relaxed mb-4">
+                        This is where transactional utility becomes king. Your long-term alliance? Toast for now. Your job is to become:
+                    </p>
+                    <div class="bg-black p-3 rounded text-center text-neon-pink font-bold text-lg mb-4">
+                        Useful. Immediately. To anyone. In any capacity.
+                    </div>
+                    <p class="font-bold text-white mb-2">Forget abstract loyalty. Focus on:</p>
+                    <ul class="list-disc list-inside space-y-1 ml-4 text-neon-pink">
+                        <li>Feeding people information.</li>
+                        <li>Helping them read others.</li>
+                        <li>Becoming the person whose survival feels beneficial.</li>
+                    </ul>
+                    <p class="mt-4 italic text-zinc-500">Players keep useful tools even when they don’t like them.</p>
+                </div>
+                
+                <h3 class="text-3xl font-oswald text-white uppercase pt-6 border-t border-zinc-800">The Québec-Specific Mindset Shift</h3>
+                <p class="text-lg leading-relaxed mb-4">
+                    Survivor Québec edits reward heart and connection—but the game punishes players who anchor themselves emotionally. You need a mind that functions like a Swiss Army knife: friendly, adaptable, and ruthlessly practical.
+                </p>
+                <blockquote class="bg-zinc-900 border-l-4 border-neon-pink p-4 rounded text-lg italic text-zinc-400">
+                    <p><strong class="text-neon-pink">Loyalty</strong> is a story you tell in confessionals.</p>
+                    <p><strong class="text-neon-pink">Utility</strong> is how you stay alive.</p>
+                </blockquote>
+                <p class="leading-relaxed pt-4">
+                    If you can treat every twist as a change in terrain rather than a rupture in narrative, you’ll float while others sink. Volatility becomes oxygen rather than threat.
+                    The rest of the guide can plug this matrix into specific scenarios—duos, tribe steals, forced exile—but this is your foundation. When instability becomes predictable, the player who embraces it becomes inevitable.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <!-- CUSTOM VIEW: RENAISSANCE (Outplay) -->
     <div id="renaissance-view">
         <button onclick="closeRenaissancePage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Outplay
         </button>
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4"><span class="text-neon-pink">Survivor</span> Québec</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">Field Report: The "Old School" Renaissance</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Survivor</span> Québec</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Field Report: The "Old School" Renaissance</h2>
                  <div class="mt-4 text-xs uppercase tracking-widest text-zinc-600">
                     Host: Patrice Bélanger | Est. 2023 | Status: Active
                 </div>
@@ -732,23 +1119,23 @@
                 <p>If you want to understand the difference in production standards, look at Season 1. In the US, obstacles are padded with foam. In Québec, they use solid timber.</p>
                 <div class="bg-zinc-900 border-l-4 border-neon-pink p-6 my-6 rounded-r-lg">
                     <strong class="text-neon-pink block mb-2 uppercase tracking-wider">⚠️ Injury Report: Jean-Junior (S1)</strong>
-                    During a blindfolded block challenge, JJ struck his head violently against an unpadded wooden prop. Result? His fifth lifetime concussion, a bloody lip, and severe dizziness.
+                    <span class="italic text-white">During a blindfolded block challenge, JJ struck his head violently against an unpadded wooden prop. Result? His fifth lifetime concussion, a bloody lip, and severe dizziness.</span>
                 </div>
                 <p><strong class="text-white">The Implication:</strong> The danger is real. You can't just be a "puzzle specialist" here; you have to be physically resilient enough to survive the course. The environment rewards those who can push through pain and disorientation, adding a layer of grit that the US version has long abandoned.</p>
             </section>
              <section class="mb-16 max-w-4xl mx-auto !h-auto !p-0">
                 <h2 class="text-3xl font-oswald text-white mb-6 uppercase"><span class="text-neon-pink">03.</span> Complexity: The Parity Cube</h2>
-                <p>Just because they like heavy lifting doesn't mean they're dumb. Season 2 introduced a 3x3x3 Cube Puzzle that was mathematically beautiful. It required fitting 2x2 blocks and 1x1 blocks into a perfect cube.</p>
+                <p>Just because they like heavy lifting doesn't mean they're dumb. Season 2 introduced a $3 \times 3 \times 3$ Cube Puzzle that was mathematically beautiful. It required fitting $2 \times 2$ blocks and $1 \times 1$ blocks into a perfect cube.</p>
                 <h3 class="text-xl font-bold text-white mt-6 mb-2">The "Sudoku" Logic</h3>
                 <p>Most players tried to build it intuitively. They failed. The puzzle is governed by <strong class="text-white">Parity Constraints</strong>:</p>
                 <div class="bg-zinc-900 p-8 rounded-lg border border-zinc-800 my-6">
                     <div class="flex justify-between py-3 border-b border-zinc-800">
                         <span class="text-neon-pink font-bold">The Constraint:</span>
-                        <span>A 3x3 layer has 9 units (Odd number).</span>
+                        <span>A $3 \times 3$ layer has 9 units (Odd number).</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-zinc-800">
                         <span class="text-neon-pink font-bold">The Problem:</span>
-                        <span>2x2 blocks take up 4 units (Even number).</span>
+                        <span>$2 \times 2$ blocks take up 4 units (Even number).</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-zinc-800">
                         <span class="text-neon-pink font-bold">The Math:</span>
@@ -756,10 +1143,10 @@
                     </div>
                     <div class="flex justify-between py-3 mt-2 pt-4 bg-zinc-950/50 px-4 -mx-4 rounded">
                         <span class="text-white font-black">THE SOLUTION:</span>
-                        <span class="text-white">Every single layer must contain exactly ONE 1x1 block.</span>
+                        <span class="text-white">Every single layer must contain exactly ONE $1 \times 1$ block.</span>
                     </div>
                 </div>
-                <p>This means the 1x1 blocks can never touch. They must form a 3D diagonal line through the center of the cube. Spotting this pattern turns a 30-minute nightmare into a 30-second finish.</p>
+                <p>This means the $1 \times 1$ blocks can never touch. They must form a $3D$ diagonal line through the center of the cube. Spotting this pattern turns a 30-minute nightmare into a 30-second finish.</p>
             </section>
              <section class="mb-16 max-w-4xl mx-auto !h-auto !p-0">
                 <h2 class="text-3xl font-oswald text-white mb-6 uppercase"><span class="text-neon-pink">04.</span> Cultural Heat</h2>
@@ -768,22 +1155,22 @@
                     <strong class="text-neon-pink block mb-2 uppercase tracking-wider">🗣️ The "Caroline" Moment</strong>
                     <span class="italic text-white">"Tu ne l'auras pas ma cr***!"</span><br>
                     <span class="text-zinc-500 text-sm">(roughly: "You won't get it, you f***er!")</span><br><br>
-                    When Caroline screamed this at an opponent in Season 1, it went viral. It highlighted that in Québec, the rivalry isn't just strategic—it's personal.
+                    <span class="text-zinc-300">When Caroline screamed this at an opponent in Season 1, it went viral. It highlighted that in Québec, the rivalry isn't just strategic—it's personal.</span>
                 </div>
                 <p><strong class="text-white">Survival Matters Again:</strong> In Season 2, the Nawa (Orange) tribe dominated so hard that the Bayani (Blue) tribe literally started falling apart, leading to a medical evac (Anabelle). In the US, you lose and get a slightly worse campsite. In Québec, you lose and you starve. Challenge performance is directly tied to basic survival.</p>
             </section>
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: JURY MANAGEMENT -->
+    <!-- CUSTOM VIEW: JURY MANAGEMENT (End Game) -->
     <div id="jury-view">
         <button onclick="closeJuryPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to End Game
         </button>
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4">General Jury Management Principles</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">The Québec Context</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald">General Jury Management Principles</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">The Québec Context</h2>
             </div>
         </header>
         <main class="container mx-auto px-4 py-12 max-w-4xl font-roboto text-zinc-300">
@@ -813,7 +1200,7 @@
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: PANAMA -->
+    <!-- CUSTOM VIEW: PANAMA (Outlast) -->
     <div id="panama-view">
         <button onclick="closePanamaPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Outlast
@@ -821,27 +1208,27 @@
         
         <header class="bg-black text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4">Destination: Panama</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">Survivor Québec Season 4 Location Guide</h2>
-                <p class="mt-4 text-neon-pink font-bold text-sm uppercase tracking-widest">Coordinates: 8.5380° N, 80.7821° W</p>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald">Destination: Panama</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Survivor Québec Season 4 Location Guide</h2>
+                <p class="mt-4 text-neon-pink font-bold text-sm uppercase tracking-widest">Coordinates: $8.5380^\circ$ N, $80.7821^\circ$ W</p>
             </div>
         </header>
 
         <main class="container mx-auto px-4 py-12 font-roboto text-zinc-300 max-w-5xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Climate Section -->
-                <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg">
+                <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg !h-auto !p-8">
                     <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">The Climate</h3>
                     <div class="space-y-6">
                         <div>
                             <strong class="text-neon-pink block mb-1 uppercase text-sm">Temperature</strong>
-                            <p>Expect relentless heat. Daytime highs average 30°C - 32°C (86°F - 90°F), but high humidity makes it feel closer to 38°C. Nighttime lows rarely drop below 24°C (75°F).</p>
+                            <p>Expect relentless heat. Daytime highs average $30^\circ\text{C}$ - $32^\circ\text{C}$ ($86^\circ\text{F}$ - $90^\circ\text{F}$), but high humidity makes it feel closer to $38^\circ\text{C}$. Nighttime lows rarely drop below $24^\circ\text{C}$ ($75^\circ\text{F}$).</p>
                         </div>
                         <div>
                             <strong class="text-neon-pink block mb-1 uppercase text-sm">The Rainy Season (Invierno)</strong>
                             <p>Panama has a distinct wet season. Rainstorms are intense, sudden, and heavy. While they provide fresh water, they destroy morale and lower body temperature rapidly if shelter isn't adequate. Hypothermia is a risk even in the tropics when wet and calorie-deficient.</p>
                         </div>
-                         <div>
+                          <div>
                             <strong class="text-neon-pink block mb-1 uppercase text-sm">Daylight</strong>
                             <p>Located near the equator, Panama has roughly 12 hours of daylight year-round. Sunset is usually around 6:30 PM. Darkness falls quickly.</p>
                         </div>
@@ -849,12 +1236,12 @@
                 </section>
 
                 <!-- Environment Section -->
-                <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg">
+                <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg !h-auto !p-8">
                     <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">The Elements</h3>
                     <div class="space-y-6">
                         <div>
                             <strong class="text-neon-pink block mb-1 uppercase text-sm">Water Temperature</strong>
-                            <p>The ocean is warm, typically 27°C - 29°C (80°F - 84°F). While comfortable for swimming, it doesn't provide much relief from the air heat.</p>
+                            <p>The ocean is warm, typically $27^\circ\text{C}$ - $29^\circ\text{C}$ ($80^\circ\text{F}$ - $84^\circ\text{F}$). While comfortable for swimming, it doesn't provide much relief from the air heat.</p>
                         </div>
                         <div>
                             <strong class="text-neon-pink block mb-1 uppercase text-sm">Terrain</strong>
@@ -868,7 +1255,7 @@
                 </section>
 
                 <!-- Wildlife Section (Full Width) -->
-                <section class="lg:col-span-2 bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg">
+                <section class="lg:col-span-2 bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg !h-auto !p-8">
                     <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">Wildlife & Hazards</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div>
@@ -879,7 +1266,7 @@
                             <strong class="text-neon-pink block mb-2 uppercase text-sm">Marine Life</strong>
                             <p>Stingrays bury themselves in the shallow sand—shuffle your feet! Jellyfish are common. Sharks are present but rarely aggressive near shore. Sea urchins on rocks are a common injury risk.</p>
                         </div>
-                         <div>
+                          <div>
                             <strong class="text-neon-pink block mb-2 uppercase text-sm">Jungle Critters</strong>
                             <p>Howler monkeys will wake you up at 4 AM with terrifying screams. Sloths, iguanas, and colorful poison dart frogs (don't touch!) inhabit the forest.</p>
                         </div>
@@ -889,85 +1276,87 @@
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: CITY GIRL -->
+    <!-- CUSTOM VIEW: CITY GIRL (Outlast) -->
     <div id="city-girl-view">
          <button onclick="closeCityGirlPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Outlast
         </button>
         
-        <div class="min-h-screen bg-zinc-50 p-8 md:p-16 font-georgia text-zinc-800">
-             <div class="max-w-4xl mx-auto bg-white p-8 md:p-16 shadow-2xl border border-zinc-200">
-                 <h1 class="text-4xl font-bold text-center text-red-900 border-b-4 border-red-900 pb-4 mb-8">Expeditionary Field Manual: Tactical Camp Utility</h1>
+        <div class="min-h-screen p-8 md:p-16 font-roboto text-zinc-300">
+             <div class="max-w-4xl mx-auto dark-card p-8 md:p-16 rounded-xl shadow-2xl">
+                 <h1 class="text-4xl font-bold text-center dark-header border-b-4 border-neon-pink pb-4 mb-8 font-oswald">Expeditionary Field Manual: Tactical Camp Utility</h1>
                  
-                 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 italic text-sm text-blue-900">
-                    Welcome to the 42-Day Protocol. Your greatest threats are <strong class="text-blue-900">heat stress</strong> and <strong class="text-blue-900">dehydration</strong>, not cold or starvation. This guide reorders traditional survival priorities to maximize <strong class="text-blue-900">energy conservation</strong> and <strong class="text-blue-900">low-profile utility</strong> in a Panamanian dry-season environment.
+                 <div class="bg-zinc-950 border-l-4 border-neon-pink/50 p-4 mb-8 italic text-sm text-zinc-400 rounded-r-lg">
+                    <h2 class="text-2xl font-oswald dark-header mb-3">CITY GIRL</h2>
+                    <p>This module focuses on the physical and environmental adaptations required for a 42-day campaign in a hot, tropical location, prioritizing efficiency, safety, and energy conservation.</p>
                 </div>
 
-                <h2 class="text-2xl font-bold text-green-900 border-b-2 border-green-900 pb-2 mt-12 mb-6">I. Environmental and Metabolic Context</h2>
-                <h3 class="text-lg font-bold text-indigo-900 mt-6 mb-3">I.A. Climate Modeling and Risk Assessment</h3>
-                <p class="mb-4">The Panama dry season is defined by <strong class="text-zinc-900">peak heat</strong> and <strong class="text-zinc-900">high humidity (~80%)</strong>. The most immediate life threat is functional collapse. Your survival hierarchy must be modified:</p>
-                <div class="bg-red-50 border-2 border-red-400 p-4 mb-6 text-red-700 font-bold text-center">
-                    MODIFIED SURVIVAL HIERARCHY: Water (Hydration & Shade) > Shelter (Elevation) > Fire > Food.
-                </div>
-
-                <h3 class="text-lg font-bold text-indigo-900 mt-6 mb-3">I.B. The Caloric Deficit Battlefield</h3>
-                <p class="mb-4">You will operate under <strong class="text-zinc-900">chronic, severe caloric restriction</strong>. A single coconut provides ~1,400 kcal, insufficient for labor. All physical activity must be viewed as an <strong class="text-zinc-900">energy accounting</strong> transaction.</p>
+                <h2 class="text-2xl font-bold text-white border-b-2 border-zinc-700 pb-2 mt-12 mb-6 font-oswald dark-header">1. Environmental Adaptation: The Tropical Hierarchy 💧</h2>
                 
-                <hr class="my-8 border-zinc-300">
-
-                <h2 class="text-2xl font-bold text-green-900 border-b-2 border-green-900 pb-2 mt-12 mb-6">II. Shelter Engineering for Tropical Resilience</h2>
-                <p class="mb-4">Your shelter's purpose is to mitigate <strong class="text-zinc-900">dampness</strong>, provide <strong class="text-zinc-900">shade</strong>, and prevent <strong class="text-zinc-900">ground-transfer energy losses</strong>.</p>
+                <p class="mb-4 leading-relaxed">In a hot, humid environment like Panama, the immediate threat is functional collapse due to heat and dehydration, requiring a shift in traditional survival priorities.</p>
                 
-                <h3 class="text-lg font-bold text-indigo-900 mt-6 mb-3">II.A. Case Study in Failure: Digging Down</h3>
-                <p class="mb-4"><strong>Do NOT dig down!</strong> Digging a pit shelter in a coastal, tropical area guarantees flooding from tidal intrusion or storm runoff.</p>
-                <div class="bg-red-50 border-2 border-red-400 p-4 mb-6 text-red-700 font-bold text-center">
-                     ABSOLUTE PROTOCOL: Elevation is MANDATORY.
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">A. Modified Survival Hierarchy</h3>
+                <p class="mb-4 leading-relaxed">
+                    Prioritize <strong class="text-white">Water (Hydration & Shade)</strong>: This must be secured above all other forms of traditional, insulated shelter.
+                </p>
+                <div class="bg-zinc-950 border-2 border-neon-pink/50 p-4 mb-6 text-neon-pink font-bold text-center rounded">
+                    HIERARCHY: Water (Hydration & Shade) $>$ Shelter (Elevation) $>$ Fire $>$ Food.
                 </div>
+                <p class="mb-4 leading-relaxed">
+                    The Threat: <strong class="text-white">Heat stress and dehydration</strong> are the most acute risks, making constant hydration and aggressive use of shade non-negotiable.
+                </p>
 
-                <h3 class="text-lg font-bold text-indigo-900 mt-6 mb-3">II.B. The Engineering of Elevation</h3>
-                <ul class="list-disc pl-6 space-y-2 mb-6">
-                    <li><strong class="text-zinc-900">Foundation:</strong> Build a sleeping platform <strong class="text-zinc-900">minimum 6 inches off the floor</strong>.</li>
-                    <li><strong class="text-zinc-900">Insulation:</strong> Insulate the platform with <strong class="text-zinc-900">6 to 12 inches of compacted, dry debris</strong>.</li>
-                    <li><strong class="text-zinc-900">A-Frame Geometry:</strong> Use a <strong class="text-zinc-900">minimum roof pitch of 45 degrees</strong> for rapid runoff.</li>
+                <h2 class="text-2xl font-bold text-white border-b-2 border-zinc-700 pb-2 mt-12 mb-6 font-oswald dark-header">2. Shelter Engineering for Tropical Resilience 🏗️</h2>
+                <p class="mb-4 leading-relaxed">The shelter's purpose is to mitigate dampness, provide shade, and prevent ground-transfer energy loss, ensuring efficient rest.</p>
+                
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">A. Elevation and Insulation</h3>
+                <ul class="list-disc pl-6 space-y-3 mb-6 text-zinc-300">
+                    <li class="leading-relaxed"><strong class="text-white">Elevation is MANDATORY:</strong> Build a sleeping platform a minimum of 6 inches off the forest floor. This foundation is critical to mitigate dampness, keep you away from pests, and reduce conductive heat loss. </li>
+                    <li class="leading-relaxed"><strong class="text-white">Failure Case:</strong> Never dig below the natural ground line for a dwelling; this guarantees catastrophic flooding during rain.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Insulation:</strong> Combat conductive heat loss (up to $\approx 80\%$ of total heat loss) by placing a thick mattress (6 to 12 inches) of compacted, dry debris (leaves/grasses) on top of the elevated platform.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Steep Roof Pitch:</strong> Design the roof with a minimum $45$-degree angle to ensure rapid water runoff during heavy tropical downpours.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">B. Camp Layout (Triangulation Model)</h3>
+                <p class="mb-4 leading-relaxed">
+                    <strong class="text-white">Triangulate Your Camp:</strong> Arrange the three critical functional areas—Shelter/Rest, Fire/Cooking, and Water Source/Storage—in a tight, efficient triangle.
+                </p>
+                <p class="bg-zinc-950 border-l-4 border-neon-pink p-4 mb-6 text-sm text-zinc-400 rounded-r-lg">
+                    <strong class="text-white block mb-1">Goal:</strong> This layout minimizes the travel time and energy expended on routine tasks, reinforcing the principle of energy conservation. 
+                </p>
+                
+                <h2 class="text-2xl font-bold text-white border-b-2 border-zinc-700 pb-2 mt-12 mb-6 font-oswald dark-header">3. Fire-Starting Utility and Maintenance 🔥</h2>
+                <p class="mb-4 leading-relaxed">The ability to produce and maintain fire consistently is a life-critical technical skill that secures immediate utility without projecting excessive physical dominance.</p>
+                
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">A. Fire Mastery Protocols</h3>
+                <ul class="list-disc pl-6 space-y-3 mb-6 text-zinc-300">
+                    <li class="leading-relaxed"><strong class="text-white">Tinder Preparation (The Powder Rule):</strong> Initial tinder material must be broken down until it achieves a "cotton ball-consistency" or powder-like fluffiness. This ensures it can reliably catch low heat (like a coal or a spark).</li>
+                    <li class="leading-relaxed"><strong class="text-white">Coal Transfer Protocol:</strong> Master the gentle, slow transfer of the glowing coal into the tinder. Use controlled blowing (avoiding premature aggression) to slowly transform the ember into a sustainable flame.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Staging Materials:</strong> Upon arrival, aggressively gather a massive, tiered supply of dry wood and logs. This transitions the fire process from high-visibility effort (gathering) to low-visibility maintenance (feeding the existing fire).</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold text-white border-b-2 border-zinc-700 pb-2 mt-12 mb-6 font-oswald dark-header">4. Risk Mitigation and Hygiene Protocol ⚕️</h2>
+                <p class="mb-4 leading-relaxed">The majority of medical issues that threaten a player's longevity are preventable trauma and infections.</p>
+
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">A. Water and Infection Control</h3>
+                <ul class="list-disc pl-6 space-y-3 mb-6 text-zinc-300">
+                    <li class="leading-relaxed"><strong class="text-white">Water Purification:</strong> All ground-sourced water must be treated. It must reach a <strong class="text-neon-pink">FULL ROLLING BOIL for ONE MINUTE</strong> to inactivate all waterborne pathogens.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Safest Procurement:</strong> Rainwater harvesting (collecting water via a clean tarp) is the safest, lowest-effort source.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Infection Control:</strong> Meticulous hand hygiene is mandatory, especially before food preparation, to prevent gastrointestinal and respiratory illnesses. [Image of basic hand hygiene guidelines]</li>
                 </ul>
                 
-                <hr class="my-8 border-zinc-300">
-
-                <h2 class="text-2xl font-bold text-green-900 border-b-2 border-green-900 pb-2 mt-12 mb-6">III. Fire-Starting Utility</h2>
-                <p class="mb-4">The ability to produce fire consistently is a <strong class="text-zinc-900">life-critical utility</strong>.</p>
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 text-sm">
-                    <strong class="text-yellow-900 block mb-1">Strategic Goal:</strong> 
-                    Achieve <strong class="text-yellow-900">low-visibility maintenance</strong>. Aggressively gather a massive supply of wood in advance and maintain a constant coal bed. This masks effort and conserves energy.
-                </div>
-
-                <hr class="my-8 border-zinc-300">
-                
-                <h2 class="text-2xl font-bold text-green-900 border-b-2 border-green-900 pb-2 mt-12 mb-6">IV. Food Sourcing & Water</h2>
-                <p class="mb-4"><strong class="text-zinc-900">Water is a higher priority than food.</strong></p>
-                <div class="bg-red-50 border-2 border-red-400 p-4 mb-6 text-red-700 font-bold text-center">
-                     BEST PRACTICE: Rainwater Harvesting. Collect atmospheric water directly.
-                </div>
-                <p class="mb-4">Any ground-sourced water must be treated. The standard is <strong class="text-zinc-900">BOILING: FULL ROLLING BOIL for ONE MINUTE</strong>.</p>
-
-                <hr class="my-8 border-zinc-300">
-
-                <h2 class="text-2xl font-bold text-green-900 border-b-2 border-green-900 pb-2 mt-12 mb-6">V. Energy Conservation</h2>
-                <h3 class="text-lg font-bold text-indigo-900 mt-6 mb-3">V.B. The Art of "Working Smart"</h3>
-                <p class="mb-4">Maximize results with minimal observed effort. This is the <strong class="text-zinc-900">Conservationist Model</strong>.</p>
-                <ul class="list-disc pl-6 space-y-2 mb-6">
-                    <li><strong class="text-zinc-900">Conservation Tactics:</strong> Strategic napping, deliberate physical pacing.</li>
-                    <li><strong class="text-zinc-900">Long-Term Goal:</strong> Preserve physical capital to <strong class="text-zinc-900">"peak"</strong> during individual immunity challenges. Being <strong class="text-zinc-900">80% effective at 20% visible effort</strong> is the strategic advantage.</li>
+                <h3 class="text-xl font-bold text-neon-pink mt-6 mb-3">B. Physical Safety and Wardrobe</h3>
+                <ul class="list-disc pl-6 space-y-3 mb-6 text-zinc-300">
+                    <li class="leading-relaxed"><strong class="text-white">Ergonomic Lifting:</strong> Prevent musculoskeletal trauma (a leading reason for escalated care) by adhering strictly to proper lifting form: lift with the legs, keep items close to the body, and maintain a straight back.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Night Movement Safety:</strong> To prevent catastrophic, game-ending injuries, clear the immediate camp surroundings and use conservative speed after sunset.</li>
+                    <li class="leading-relaxed"><strong class="text-white">Wardrobe:</strong> Choose quick-dry, long-sleeved shirts and long pants to mitigate sun exposure, cold, and dampness.</li>
                 </ul>
-                
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-12 italic text-sm text-blue-900">
-                    <strong class="block mb-2">Conclusion:</strong>
-                    Success is achieved through calculated conservation and reliable, non-threatening utility. Strategic idleness and highly efficient, low-visible-effort maintenance are the highest forms of tactical utility.
-                </div>
+
              </div>
         </div>
     </div>
 
-    <!-- CUSTOM VIEW: DAY 1 USA VS QC -->
+    <!-- CUSTOM VIEW: DAY 1 USA VS QC (Meta) -->
     <div id="day1-view">
         <button onclick="closeDay1Page()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to Meta Game
@@ -975,14 +1364,14 @@
         
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4"><span class="text-neon-pink">Stratégie</span> Survivor Québec</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">Analyse des Fondamentaux et Recommandations pour le Jour 1</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Stratégie</span> Survivor Québec</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Analyse des Fondamentaux et Recommandations pour le Jour 1</h2>
             </div>
         </header>
         
         <main class="container mx-auto px-4 py-12 font-roboto text-zinc-300 max-w-5xl">
              <!-- Section I -->
-            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12">
+            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12 !h-auto">
                 <h2 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">I. Mécaniques du Jour 1 : USA vs. Québec</h2>
                 <p class="mb-6 leading-relaxed">Contrairement à la version moderne américaine, <em>Survivor Québec (SQ)</em> adhère à une approche plus "old school" dans sa structure de départ, déplaçant l'accent de la navigation de twists vers la gestion des ressources et les dynamiques sociales classiques.</p>
                 
@@ -1017,7 +1406,7 @@
             </section>
 
              <!-- Section II -->
-            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12">
+            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12 !h-auto">
                 <h2 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">II. Contraintes de Production</h2>
                 
                 <div class="mb-8">
@@ -1036,7 +1425,7 @@
             </section>
 
             <!-- Section III -->
-            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12">
+            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg mb-12 !h-auto">
                 <h2 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">III. Priorités de Survie</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -1068,8 +1457,8 @@
                 </div>
             </section>
 
-             <!-- Section IV -->
-            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg">
+            <!-- Section IV -->
+            <section class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-lg !h-auto">
                 <h2 class="text-3xl font-oswald text-white uppercase mb-6 border-l-4 border-neon-pink pl-4">IV. Recommandations Stratégiques (SQ)</h2>
                 <div class="space-y-4">
                     <div class="flex items-start">
@@ -1090,7 +1479,7 @@
         </main>
     </div>
 
-    <!-- CUSTOM VIEW: FTC (STRATEGIES) -->
+    <!-- CUSTOM VIEW: FTC (STRATEGIES) (End Game) -->
     <div id="ftc-view">
         <button onclick="closeFTCPage()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
             &larr; Back to End Game
@@ -1098,8 +1487,8 @@
         
         <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4">Strategies at FTC</h1>
-                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400">The Art of the Win</h2>
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald">Strategies at FTC</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">The Art of the Win</h2>
             </div>
         </header>
 
@@ -1107,28 +1496,28 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
                 <!-- LEFT COLUMN -->
                 <div class="space-y-12">
-                    <section class="text-center mb-6">
-                         <h3 class="text-2xl font-bold text-white font-oswald uppercase border-b-4 border-neon-pink inline-block pb-2 px-4 text-center">The Two Essential Strategies Summarized</h3>
-                         
-                         <h4 class="text-xl font-bold text-neon-pink mb-3 text-left mt-8">1. The Rhetorical Blueprint (The Structure)</h4>
-                         <p class="mb-4 text-left">This is the required three-part framework for your opening statement, ensuring you address every angle of your game:</p>
-                         <ul class="space-y-4 list-none pl-4 border-l border-zinc-800 text-left">
-                             <li>
-                                 <strong class="text-white block mb-1">The Strategic Case ("What I Did"):</strong>
-                                 Outline your entire game trajectory with Intentionality. Identify key alliances, critical votes, and idol plays to establish yourself as the active competitor.
-                             </li>
-                             <li>
-                                 <strong class="text-white block mb-1">The Social Case ("How I Managed You"):</strong>
-                                 Address the emotional reality of the game. Acknowledge betrayal, reframe negative reputations, and secure respect by demonstrating superior social intelligence.
-                             </li>
-                             <li>
-                                 <strong class="text-white block mb-1">The Closing Case ("Why Me Now"):</strong>
-                                 Isolate and highlight your Endgame Moves (post-Final 6) to prove you engineered the final result.
-                             </li>
-                         </ul>
+                    <section class="text-center mb-6 !h-auto">
+                           <h3 class="text-2xl font-bold text-white font-oswald uppercase border-b-4 border-neon-pink inline-block pb-2 px-4 text-center">The Two Essential Strategies Summarized</h3>
+                           
+                           <h4 class="text-xl font-bold text-neon-pink mb-3 text-left mt-8">1. The Rhetorical Blueprint (The Structure)</h4>
+                           <p class="mb-4 text-left">This is the required three-part framework for your opening statement, ensuring you address every angle of your game:</p>
+                           <ul class="space-y-4 list-none pl-4 border-l border-zinc-800 text-left">
+                                <li>
+                                    <strong class="text-white block mb-1">The Strategic Case ("What I Did"):</strong>
+                                    Outline your entire game trajectory with Intentionality. Identify key alliances, critical votes, and idol plays to establish yourself as the active competitor.
+                                </li>
+                                <li>
+                                    <strong class="text-white block mb-1">The Social Case ("How I Managed You"):</strong>
+                                    Address the emotional reality of the game. Acknowledge betrayal, reframe negative reputations, and secure respect by demonstrating superior social intelligence.
+                                </li>
+                                <li>
+                                    <strong class="text-white block mb-1">The Closing Case ("Why Me Now"):</strong>
+                                    Isolate and highlight your Endgame Moves (post-Final 6) to prove you engineered the final result.
+                                </li>
+                           </ul>
                     </section>
 
-                    <article class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-xl">
+                    <article class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-xl !h-auto">
                         <h1 class="text-2xl md:text-4xl font-black font-oswald text-white uppercase mb-6 leading-tight">
                             The Emotional Sweep: <span class="text-neon-pink">How Adam Klein Turned Paranoia into a Perfect 10-0-0</span>
                         </h1>
@@ -1164,14 +1553,14 @@
 
                 <!-- RIGHT COLUMN -->
                 <div class="space-y-12">
-                     <section>
-                         <!-- FAILS CARD -->
+                     <section class="!h-auto">
+                           <!-- FAILS CARD -->
                         <div class="bg-zinc-950 border-l-4 border-red-600 p-6 mb-8 rounded-r shadow-lg animate-[slideInRight_0.5s_ease-out]">
                             <div class="flex justify-between items-center mb-4 border-b border-zinc-800 pb-2">
                                  <h3 class="text-2xl font-bold text-red-500 font-oswald uppercase">FAILS</h3>
                                  <span class="text-xs text-zinc-500 uppercase tracking-widest">Cautionary Tales</span>
                             </div>
-                             <div class="space-y-6">
+                              <div class="space-y-6">
                                  <!-- Amanda -->
                                  <div>
                                      <h4 class="text-white font-bold text-sm uppercase mb-1">The Apology Narrative <span class="text-zinc-500 font-normal text-xs ml-2">(Amanda Kimmel)</span></h4>
@@ -1190,21 +1579,21 @@
                              </div>
                         </div>
 
-                         <h4 class="text-xl font-bold text-neon-pink mb-3">2. The Winner's Narrative (The Content)</h4>
-                         <p class="mb-4">This is the thematic lens you apply to your story to overcome jury resentment and spin flaws into strategic assets:</p>
-                         <ul class="space-y-4 list-none pl-4 border-l border-zinc-800">
-                             <li>
-                                 <strong class="text-white block mb-1">The Todd Model:</strong>
-                                 Reframe Ruthlessness as Necessary Competence. Own the lies, but pivot immediately to the strategic benefit, asking the jury to reward effectiveness over ethical consistency.
-                             </li>
-                             <li>
-                                 <strong class="text-white block mb-1">The Sandra Model:</strong>
-                                 Reframe Physical Weakness as Superior Social Cunning. Argue that being underestimated was a deliberate social strategy, asking the jury to reward the master manipulator over the athlete.
-                             </li>
-                         </ul>
+                           <h4 class="text-xl font-bold text-neon-pink mb-3">2. The Winner's Narrative (The Content)</h4>
+                           <p class="mb-4">This is the thematic lens you apply to your story to overcome jury resentment and spin flaws into strategic assets:</p>
+                           <ul class="space-y-4 list-none pl-4 border-l border-zinc-800">
+                                <li>
+                                    <strong class="text-white block mb-1">The Todd Model:</strong>
+                                    Reframe Ruthlessness as Necessary Competence. Own the lies, but pivot immediately to the strategic benefit, asking the jury to reward effectiveness over ethical consistency.
+                                </li>
+                                <li>
+                                    <strong class="text-white block mb-1">The Sandra Model:</strong>
+                                    Reframe Physical Weakness as Superior Social Cunning. Argue that being underestimated was a deliberate social strategy, asking the jury to reward the master manipulator over the athlete.
+                                </li>
+                           </ul>
                     </section>
 
-                    <article class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-xl">
+                    <article class="bg-zinc-950 border border-zinc-800 p-8 rounded-xl shadow-xl !h-auto">
                         <h1 class="text-2xl md:text-4xl font-black font-oswald text-white uppercase mb-6 leading-tight">
                             The FTC GOAT: <span class="text-neon-pink">How Todd Herzog Mastered the Jury</span> and Bagged the Million
                         </h1>
@@ -1277,10 +1666,11 @@
 
         // 2. PORTFOLIO IMAGES
         const PORTFOLIO_ITEMS = [
-            { id: '1', name: 'The Strategist', season: 'Season 45', image: 'https://picsum.photos/400/600?random=1' },
-            { id: '2', name: 'The Socialite', season: 'Season 32', image: 'https://picsum.photos/400/600?random=2' },
-            { id: '3', name: 'The Beast', season: 'Season 28', image: 'https://picsum.photos/400/600?random=3' },
-            { id: '4', name: 'The Villain', season: 'Season 20', image: 'https://picsum.photos/400/600?random=4' },
+            { id: '1', name: 'The Strategist', season: 'Season 45', image: 'https://placehold.co/400x600/18181b/FF69B4?text=Player+A' },
+            { id: '2', name: 'The Socialite', season: 'Season 32', image: 'https://placehold.co/400x600/18181b/FF69B4?text=Player+B' },
+            { id: '3', name: 'The Beast', season: 'Season 28', image: 'https://placehold.co/400x600/18181b/FF69B4?text=Player+C' },
+            { id: '4', name: 'The Villain', season: 'Season 20', image: 'https://placehold.co/400x600/18181b/FF69B4?text=Player+D' },
+            // Add more players if needed
         ];
 
         // 3. TOPIC CONTENT & IMAGES
@@ -1291,8 +1681,13 @@
                 subTopics: [
                     { 
                         title: 'How Have Others Prepared', 
-                        description: 'Analyzing the preparation routines of past winners. From physical training regimens to puzzle practice and social engineering research.', 
-                        image: 'https://placehold.co/600x400/000000/FF69B4?text=History' 
+                        description: 'Analyzing the physical and psychological preparation routines of past winners and contestants.', 
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Contestant+Prep' 
+                    },
+                    { 
+                        title: 'Meta Strategy Deep Dive', 
+                        description: 'Advanced strategic principles: backwards induction, threat level management, and the "Meat Shield" alignment.', 
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Meta+Deep+Dive' 
                     },
                     { 
                         title: 'Suggestions Leading Up to Departure', 
@@ -1305,9 +1700,14 @@
                 title: 'Meta Game',
                 subtitle: 'Understanding the invisible currents that drive the modern game.',
                 subTopics: [
-                    { title: 'Threat Management', description: 'The art of lowering your profile while maintaining agency.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Threats' },
+                    { 
+                        title: 'Realities of Reality TV', // <--- NEW TOPIC ADDED
+                        description: 'Navigating the psychological crucible: managing deprivation, cognitive collapse, and using confessionals as intelligence.',
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Reality+TV+Crucible'
+                    },
+                    { title: 'Threat Management', description: 'The art of lowering your profile while maintaining agency.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Threat+Management' },
                     { title: 'Voting Blocs', description: 'Why rigid alliances are dead and how to surf the chaos of voting blocs.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Voting+Blocs' },
-                    { title: 'Jury Management', description: 'Starting the game with the end in mind.', image: 'https://placehold.co/600x400/000000/FF69B4?text=The+Jury' },
+                    { title: 'Jury Management (Early)', description: 'Starting the game with the end in mind.', image: 'https://placehold.co/600x400/000000/FF69B4?text=The+Jury' },
                     { 
                         title: 'Day 1: USA VS. QC', 
                         description: 'Analyse comparative des stratégies de départ. Les différences cruciales entre les formats.', 
@@ -1319,6 +1719,11 @@
                 title: 'Outwit',
                 subtitle: 'The Social Game. People are the most dangerous puzzle pieces.',
                 subTopics: [
+                    {
+                        title: 'The Volatility Matrix', 
+                        description: 'A Quadrant system for tactical adaptation and managing chaos in the Survivor Québec metagame.',
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Volatility+Matrix'
+                    },
                     {
                         title: 'History of Strategy: SQ',
                         description: 'Mastering Social Intelligence (SQ). Analyzing the evolution of social strategy and behavioral patterns across 45+ seasons.',
@@ -1369,10 +1774,10 @@
                     { 
                         title: 'Destination: Panama',
                         description: 'Know your enemy. A detailed guide to the climate, wildlife, and survival conditions of Season 4\'s location.',
-                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Panama' 
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Panama+Location' 
                     },
-                    { title: 'COLD', description: 'Managing hunger, sleep deprivation, and elements.', image: 'https://placehold.co/600x400/000000/FF69B4?text=COLD' },
-                    { title: 'I\'M A CITY GIRL', description: 'Pacing yourself for the 26-day marathon.', image: 'https://placehold.co/600x400/000000/FF69B4?text=CITY+GIRL' }
+                    { title: 'COLD', description: 'Managing hunger, sleep deprivation, and elements.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Cold+Survival' },
+                    { title: "I'M A CITY GIRL", description: 'Pacing yourself for the 42-day marathon.', image: 'https://placehold.co/600x400/000000/FF69B4?text=City+Girl+Survival' }
                 ]
             },
             'endgame': {
@@ -1381,7 +1786,7 @@
                 subTopics: [
                     { title: 'The Pitch', description: 'Resume building 101. Identifying your key moves and translating them into a winning narrative.', image: 'https://placehold.co/600x400/000000/FF69B4?text=The+Pitch' },
                     { title: 'Final Tribal Council', description: 'Structuring your opening statement. How to articulate your game without sounding arrogant or passive.', image: 'https://placehold.co/600x400/000000/FF69B4?text=FTC' },
-                    { title: 'Jury Management', description: 'Managing relationships with the people you vote out.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Jury' }
+                    { title: 'Jury Management', description: 'Managing relationships with the people you vote out.', image: 'https://placehold.co/600x400/000000/FF69B4?text=Jury+Management+Strategy' }
                 ]
             }
         };
@@ -1393,7 +1798,7 @@
                 description: 'Day of first impressions. Status is set by sweat and vibes. Be useful, not bossy. Fatigue exposes fakes fast. Win the boat scramble, save the chickens, don\'t be weird.'
             },
             { 
-                day: 'Jour 2', 
+                day: 'Jour 2-6', 
                 title: 'Premier Vote',
                 description: 'The tone-setter. Integrate fast or die. Ensure your name isn\'t even a whisper. The first vote draws the line between majority and dead weight.'
             },
@@ -1451,7 +1856,7 @@
                     <!-- Line Connector -->
                     <div class="absolute top-6 -left-12 w-12 h-[2px] bg-zinc-800 hidden md:block"></div>
                     
-                    <span class="text-6xl md:text-8xl font-black text-zinc-800 absolute -top-8 -left-4 -z-10 opacity-50 group-hover:text-zinc-700 transition-colors duration-300">
+                    <span class="text-6xl md:text-8xl font-black text-zinc-800 absolute -top-8 -left-4 -z-10 opacity-50 group-hover:text-zinc-700 transition-colors duration-300 font-oswald">
                         ${index + 1}
                     </span>
                     
@@ -1459,7 +1864,7 @@
                         <p class="text-neon-pink font-bold tracking-widest text-xs md:text-sm mb-1 uppercase">
                             ${event.day}
                         </p>
-                        <h3 class="text-2xl md:text-4xl font-black text-white uppercase leading-none mb-4">
+                        <h3 class="text-2xl md:text-4xl font-black text-white uppercase leading-none mb-4 font-oswald">
                             ${event.title}
                         </h3>
                         <p class="text-zinc-400 text-sm md:text-base leading-relaxed font-light">
@@ -1473,7 +1878,7 @@
         function renderPortfolios() {
             const container = document.getElementById('portfolio-grid');
             container.innerHTML = PORTFOLIO_ITEMS.map(item => `
-                <div class="group relative aspect-[3/4] bg-zinc-900 border border-zinc-800 hover:border-neon-pink transition-all duration-300 cursor-pointer overflow-hidden">
+                <div class="group relative aspect-[3/4] bg-zinc-900 border border-zinc-800 hover:border-neon-pink transition-all duration-300 cursor-pointer overflow-hidden rounded-xl">
                     <img 
                         src="${item.image}" 
                         alt="${item.name}" 
@@ -1483,8 +1888,8 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     
                     <div class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <p class="text-neon-pink text-xs font-bold uppercase tracking-widest mb-1">{item.season}</p>
-                        <h3 class="text-2xl font-bold text-white uppercase leading-none">{item.name}</h3>
+                        <p class="text-neon-pink text-xs font-bold uppercase tracking-widest mb-1">${item.season}</p>
+                        <h3 class="text-2xl font-bold text-white uppercase leading-none font-oswald">${item.name}</h3>
                         <div class="w-0 group-hover:w-full h-[2px] bg-neon-pink mt-3 transition-all duration-500"></div>
                     </div>
                 </div>
@@ -1493,6 +1898,36 @@
 
         function setupTimelineScroll() {
             const el = document.getElementById('timeline-container');
+            let isDragging = false;
+            let startX;
+            let scrollLeft;
+
+            el.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - el.offsetLeft;
+                scrollLeft = el.scrollLeft;
+                el.style.cursor = 'grabbing';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                isDragging = false;
+                el.style.cursor = 'grab';
+            });
+
+            el.addEventListener('mouseup', () => {
+                isDragging = false;
+                el.style.cursor = 'grab';
+            });
+
+            el.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - el.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-speed multiplier
+                el.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Mouse wheel for horizontal scroll on timeline
             el.addEventListener('wheel', (e) => {
                 if (e.deltaY === 0) return;
                 e.preventDefault();
@@ -1517,24 +1952,25 @@
             const grid = document.getElementById('subtopics-grid');
             
             grid.innerHTML = topicData.subTopics.map((sub, index) => {
+                const subTopicTitle = sub.title.replace(/'/g, "\\'"); // Sanitize title for onclick
                 return `
                 <div class="group flex flex-col space-y-4 animate-slide-up" style="animation-delay: ${index * 0.1}s">
-                    <div onclick="handleSubTopicClick('${id}', ${index})" class="overflow-hidden aspect-video bg-zinc-900 border border-zinc-800 group-hover:border-neon-pink transition-colors duration-300 relative cursor-pointer">
+                    <div onclick="handleSubTopicClick('${id}', ${index}, '${subTopicTitle}')" class="overflow-hidden aspect-video bg-zinc-900 border border-zinc-800 group-hover:border-neon-pink transition-colors duration-300 relative cursor-pointer rounded-lg">
                         <img 
                             src="${sub.image || `https://placehold.co/600x400/111/FFF?text=${encodeURIComponent(sub.title)}`}" 
                             alt="${sub.title}"
                             class="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0"
                             onerror="this.src='https://placehold.co/600x400/222/FFF?text=Missing+Img'"
                         />
-                        <div class="absolute top-0 right-0 bg-neon-pink text-black font-bold px-3 py-1 text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute top-0 right-0 bg-neon-pink text-black font-bold px-3 py-1 text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity rounded-bl-lg">
                             Read More
                         </div>
-                        <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 text-xs font-mono text-neon-pink border border-neon-pink/30">
+                        <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 text-xs font-mono text-neon-pink border border-neon-pink/30 rounded">
                             0${index + 1}
                         </div>
                     </div>
-                    <div class="cursor-pointer" onclick="handleSubTopicClick('${id}', ${index})">
-                        <h3 class="text-2xl font-bold uppercase text-white group-hover:text-neon-pink transition-colors">
+                    <div class="cursor-pointer" onclick="handleSubTopicClick('${id}', ${index}, '${subTopicTitle}')">
+                        <h3 class="text-2xl font-bold uppercase text-white group-hover:text-neon-pink transition-colors font-oswald">
                             ${sub.title}
                         </h3>
                         <p class="text-zinc-500 text-sm leading-relaxed border-l-2 border-zinc-800 pl-4 mt-2 group-hover:border-neon-pink transition-colors">
@@ -1542,16 +1978,20 @@
                         </p>
                     </div>
                 </div>
-            `}).join('');
+                `
+            }).join('');
 
             // Inject Bottom Video for End Game only
             const specialFooter = document.getElementById('topic-special-footer');
             if (id === 'endgame') {
                 specialFooter.classList.remove('hidden');
                 specialFooter.innerHTML = `
-                    <h3 class="text-2xl font-black uppercase text-white mb-6 border-l-4 border-neon-pink pl-4">Fire Making Resource</h3>
-                    <div class="w-full max-w-2xl mx-auto aspect-video border border-zinc-800 shadow-[0_0_20px_rgba(255,105,180,0.1)]">
-                        <iframe src="https://www.youtube.com/embed/fL2yuWsBGT8" width="560" height="315" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                    <h3 class="text-2xl font-black uppercase text-white mb-6 border-l-4 border-neon-pink pl-4 font-oswald">Fire Making Resource</h3>
+                    <div class="w-full max-w-2xl mx-auto aspect-video border border-zinc-800 rounded-xl shadow-[0_0_20px_rgba(255,105,180,0.1)]">
+                        <!-- Placeholder Video - Actual video links are embedded in custom views for FTC -->
+                        <div class="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-500 text-lg rounded-xl">
+                            Fire Making Video Placeholder
+                        </div>
                     </div>
                 `;
             } else {
@@ -1565,50 +2005,75 @@
             document.getElementById('topic-view').scrollTop = 0;
         }
 
-        function handleSubTopicClick(topicId, index) {
-            const topic = TOPICS[topicId];
-            if (!topic) return;
-            const sub = topic.subTopics[index];
+        function handleSubTopicClick(topicId, index, subTopicTitle) {
             
-            // 1. Specific logic for "Advantages & Twists" (Outwit)
-            if (topicId === 'outwit' && sub.title === 'Advantages & Twists') {
+            // Clean up the subTopicTitle from JavaScript escaping if necessary
+            const cleanedTitle = subTopicTitle.replace(/\\'/g, "'");
+
+            // --- OUTWIT ---
+            if (topicId === 'outwit' && cleanedTitle === 'The Volatility Matrix') {
+                openVolatilityMatrixPage();
+                return;
+            }
+
+            if (topicId === 'outwit' && cleanedTitle === 'Advantages & Twists') {
                 openAdvantagesPage();
+                return;
             }
 
-            // 2. Specific logic for "How Have Others Prepared" (Pregame)
-            if (topicId === 'pregame' && sub.title === 'How Have Others Prepared') {
+            // --- PREGAME ---
+            if (topicId === 'pregame' && cleanedTitle === 'How Have Others Prepared') {
                 openPreparationPage();
+                return;
             }
 
-            // 3. Specific logic for "SQ: Old School Renaissance" (Outplay)
-            if (topicId === 'outplay' && sub.title === 'SQ: Old School Renaissance') {
+            if (topicId === 'pregame' && cleanedTitle === 'Meta Strategy Deep Dive') {
+                openMetaPrepPage();
+                return;
+            }
+            // --- OUTPLAY ---
+            if (topicId === 'outplay' && cleanedTitle === 'SQ: Old School Renaissance') {
                 openRenaissancePage();
+                return;
             }
             
-            // 4. Specific logic for "Destination: Panama" (Outlast)
-            if (topicId === 'outlast' && sub.title === 'Destination: Panama') {
+            // --- OUTLAST ---
+            if (topicId === 'outlast' && cleanedTitle === 'Destination: Panama') {
                 openPanamaPage();
+                return;
             }
             
-            // 5. Specific logic for "I'M A CITY GIRL" (Outlast)
-            if (topicId === 'outlast' && sub.title === "I'M A CITY GIRL") {
+            if (topicId === 'outlast' && cleanedTitle === "I'M A CITY GIRL") {
                 openCityGirlPage();
+                return;
             }
 
-            // 6. Specific logic for "Final Tribal Council" (End Game)
-            if (topicId === 'endgame' && (sub.title === 'Final Tribal Council' || sub.title === 'FTC')) {
+            // --- END GAME ---
+            if (topicId === 'endgame' && cleanedTitle === 'Final Tribal Council') {
                 openFTCPage();
+                return;
             }
 
-            // 7. Specific logic for "Jury Management" (End Game)
-            if (topicId === 'endgame' && sub.title === 'Jury Management') {
+            if (topicId === 'endgame' && cleanedTitle === 'Jury Management') {
                 openJuryPage();
+                return;
             }
             
-            // 8. Specific logic for "Day 1: USA VS. QC" (Meta)
-            if (topicId === 'meta' && sub.title === 'Day 1: USA VS. QC') {
+            // --- META GAME ---
+            if (topicId === 'meta' && cleanedTitle === 'Day 1: USA VS. QC') {
                 openDay1Page();
+                return;
             }
+            
+            if (topicId === 'meta' && cleanedTitle === 'Realities of Reality TV') {
+                openRealityTVPage();
+                return;
+            }
+            
+            // Fallback for unhandled pages (e.g., Cold, Puzzles)
+            console.log(`Navigating to generic view for: ${cleanedTitle}`);
+            // If we hit an unhandled section, we can alert (using a modal) or just stay on the topic view.
+            // For now, we remain on the Topic View for content not defined in custom views.
         }
 
         function closeTopic() {
@@ -1616,12 +2081,47 @@
             document.getElementById('main-view').style.display = 'block';
         }
 
-        // --- ADVANTAGES ENCYCLOPEDIA LOGIC ---
+        // --- CUSTOM PAGE LOGIC ---
         let chartsInitialized = false;
+        
+        function openRealityTVPage() {
+            document.getElementById('topic-view').style.display = 'none';
+            document.getElementById('reality-tv-view').style.display = 'block';
+            document.getElementById('reality-tv-view').scrollTop = 0;
+        }
+
+        function closeRealityTVPage() {
+            document.getElementById('reality-tv-view').style.display = 'none';
+            document.getElementById('topic-view').style.display = 'block';
+        }
+
+        function openMetaPrepPage() {
+            document.getElementById('topic-view').style.display = 'none';
+            document.getElementById('meta-prep-view').style.display = 'block';
+            document.getElementById('meta-prep-view').scrollTop = 0;
+        }
+
+        function closeMetaPrepPage() {
+            document.getElementById('meta-prep-view').style.display = 'none';
+            document.getElementById('topic-view').style.display = 'block';
+        }
+        
+        function openVolatilityMatrixPage() {
+            document.getElementById('topic-view').style.display = 'none';
+            document.getElementById('volatility-matrix-view').style.display = 'block';
+            document.getElementById('volatility-matrix-view').scrollTop = 0;
+        }
+
+        function closeVolatilityMatrixPage() {
+            document.getElementById('volatility-matrix-view').style.display = 'none';
+            document.getElementById('topic-view').style.display = 'block';
+        }
+
 
         function openAdvantagesPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('advantages-view').style.display = 'block';
+            document.getElementById('advantages-view').scrollTop = 0;
             
             if (!chartsInitialized) {
                 initAdvantagesCharts();
@@ -1634,10 +2134,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
 
-        // --- PREPARATION PLAYBOOK LOGIC ---
         function openPreparationPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('preparation-view').style.display = 'block';
+            document.getElementById('preparation-view').scrollTop = 0;
         }
 
         function closePreparationPage() {
@@ -1645,10 +2145,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
 
-        // --- RENAISSANCE JOURNAL LOGIC ---
         function openRenaissancePage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('renaissance-view').style.display = 'block';
+            document.getElementById('renaissance-view').scrollTop = 0;
         }
 
         function closeRenaissancePage() {
@@ -1656,10 +2156,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
 
-        // --- FTC PAGE LOGIC ---
         function openFTCPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('ftc-view').style.display = 'block';
+            document.getElementById('ftc-view').scrollTop = 0;
         }
 
         function closeFTCPage() {
@@ -1667,10 +2167,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
 
-        // --- JURY PAGE LOGIC ---
         function openJuryPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('jury-view').style.display = 'block';
+            document.getElementById('jury-view').scrollTop = 0;
         }
 
         function closeJuryPage() {
@@ -1678,10 +2178,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
         
-        // --- PANAMA PAGE LOGIC ---
         function openPanamaPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('panama-view').style.display = 'block';
+            document.getElementById('panama-view').scrollTop = 0;
         }
         
         function closePanamaPage() {
@@ -1689,10 +2189,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
         
-        // --- DAY 1 PAGE LOGIC ---
         function openDay1Page() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('day1-view').style.display = 'block';
+            document.getElementById('day1-view').scrollTop = 0;
         }
         
         function closeDay1Page() {
@@ -1700,10 +2200,10 @@
             document.getElementById('topic-view').style.display = 'block';
         }
         
-        // --- CITY GIRL PAGE LOGIC ---
         function openCityGirlPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('city-girl-view').style.display = 'block';
+            document.getElementById('city-girl-view').scrollTop = 0;
         }
         
         function closeCityGirlPage() {
@@ -1766,11 +2266,11 @@
                         label: 'Game Chaos Score (Est.)',
                         data: [10, 9, 8, 7, 6, 6, 5, 5, 4, 3], 
                         backgroundColor: [
-                            '#FF69B4', '#FF69B4', '#FF69B4', // Neon Pink
-                            '#db2777', // Darker Pink
-                            '#a855f7', '#a855f7', // Purple
-                            '#7c3aed', '#7c3aed', // Darker Purple
-                            '#52525b', '#52525b'  // Zinc
+                            '#FF69B4', '#FF69B4', '#FF69B4', 
+                            '#db2777', 
+                            '#a855f7', '#a855f7', 
+                            '#7c3aed', '#7c3aed', 
+                            '#52525b', '#52525b' 
                         ],
                         borderRadius: 4
                     }]
@@ -1780,18 +2280,27 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
-                        tooltip: tooltipConfig
+                        tooltip: {
+                            ...tooltipConfig,
+                            titleFont: { size: 14, family: 'Oswald' },
+                            bodyFont: { size: 12, family: 'Roboto' },
+                            backgroundColor: '#27272a',
+                            titleColor: '#FF69B4',
+                            bodyColor: '#e4e4e7',
+                            padding: 10,
+                            caretPadding: 10
+                        }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: { display: true, text: 'Chaos/Impact Rating', color: '#a1a1aa' },
+                            title: { display: true, text: 'Chaos/Impact Rating', color: '#a1a1aa', font: { family: 'Roboto' } },
                             grid: { color: '#27272a' },
                             ticks: { color: '#a1a1aa' }
                         },
                         x: {
                             grid: { display: false },
-                            ticks: { color: '#a1a1aa' }
+                            ticks: { color: '#a1a1aa', font: { size: 10 } }
                         }
                     }
                 }
@@ -1806,12 +2315,12 @@
                     datasets: [{
                         data: [4, 3, 2, 2], 
                         backgroundColor: [
-                            '#FF69B4', // Neon Pink
-                            '#db2777', // Dark Pink
-                            '#a855f7', // Purple
-                            '#52525b'  // Zinc
+                            '#FF69B4', 
+                            '#db2777', 
+                            '#a855f7', 
+                            '#52525b' 
                         ],
-                        borderColor: '#000000',
+                        borderColor: '#09090b',
                         borderWidth: 2
                     }]
                 },
@@ -1821,12 +2330,25 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: { usePointStyle: true, padding: 20, color: '#a1a1aa' }
+                            labels: { usePointStyle: true, padding: 20, color: '#a1a1aa', font: { family: 'Roboto' } }
                         },
-                        tooltip: tooltipConfig
+                        tooltip: {
+                            ...tooltipConfig,
+                            titleFont: { size: 14, family: 'Oswald' },
+                            bodyFont: { size: 12, family: 'Roboto' },
+                            backgroundColor: '#27272a',
+                            titleColor: '#FF69B4',
+                            bodyColor: '#e4e4e7',
+                            padding: 10,
+                            caretPadding: 10
+                        }
                     }
                 }
             });
+        }
+    </script>
+</body>
+</html>
         }
     </script>
 </body>
