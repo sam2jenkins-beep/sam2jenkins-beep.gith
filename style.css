@@ -115,9 +115,7 @@ section {
 #meta-prep-view,
 #volatility-matrix-view,
 #reality-tv-view,
-#notebook-lm-view,
-#suggestions-view,
-#swimming-view { 
+#notebook-lm-view { 
     display: none;
     position: absolute;
     top: 0;
@@ -148,9 +146,7 @@ section {
 #meta-prep-view::-webkit-scrollbar,
 #volatility-matrix-view::-webkit-scrollbar,
 #reality-tv-view::-webkit-scrollbar,
-#notebook-lm-view::-webkit-scrollbar,
-#suggestions-view::-webkit-scrollbar,
-#swimming-view::-webkit-scrollbar { 
+#notebook-lm-view::-webkit-scrollbar { 
     width: 8px;
 }
 #advantages-view::-webkit-scrollbar-track,
@@ -164,9 +160,7 @@ section {
 #meta-prep-view::-webkit-scrollbar-track,
 #volatility-matrix-view::-webkit-scrollbar-track,
 #reality-tv-view::-webkit-scrollbar-track,
-#notebook-lm-view::-webkit-scrollbar-track,
-#suggestions-view::-webkit-scrollbar-track,
-#swimming-view::-webkit-scrollbar-track { 
+#notebook-lm-view::-webkit-scrollbar-track { 
     background: #18181b; /* Zinc-900 */
 }
 #advantages-view::-webkit-scrollbar-thumb,
@@ -180,9 +174,7 @@ section {
 #meta-prep-view::-webkit-scrollbar-thumb,
 #volatility-matrix-view::-webkit-scrollbar-thumb,
 #reality-tv-view::-webkit-scrollbar-thumb,
-#notebook-lm-view::-webkit-scrollbar-thumb,
-#suggestions-view::-webkit-scrollbar-thumb,
-#swimming-view::-webkit-scrollbar-thumb { 
+#notebook-lm-view::-webkit-scrollbar-thumb { 
     background: #FF69B4; /* Neon Pink */
     border-radius: 4px;
 }
@@ -198,9 +190,7 @@ section {
 #meta-prep-view h1, #meta-prep-view h2, #meta-prep-view h3,
 #volatility-matrix-view h1, #volatility-matrix-view h2, #volatility-matrix-view h3,
 #reality-tv-view h1, #reality-tv-view h2, #reality-tv-view h3,
-#notebook-lm-view h1, #notebook-lm-view h2, #notebook-lm-view h3,
-#suggestions-view h1, #suggestions-view h2, #suggestions-view h3,
-#swimming-view h1, #swimming-view h2, #swimming-view h3 { 
+#notebook-lm-view h1, #notebook-lm-view h2, #notebook-lm-view h3 { 
     font-family: 'Oswald', sans-serif;
 }
 
@@ -218,6 +208,10 @@ section {
     background-color: #18181b; /* Zinc-900 */
     color: #e4e4e7; /* Zinc-200 */
     border: 1px solid #3f3f46; /* Zinc-700 */
+}
+#city-girl-view .dark-header {
+    color: #FF69B4; /* Neon Pink */
+}
 }
 #city-girl-view .dark-header {
     color: #FF69B4; /* Neon Pink */
