@@ -162,7 +162,8 @@
         #city-girl-view,
         #meta-prep-view,
         #volatility-matrix-view,
-        #reality-tv-view { /* Added new view ID */
+        #reality-tv-view,
+        #notebook-lm-view { 
             display: none;
             position: absolute;
             top: 0;
@@ -174,11 +175,11 @@
             background-color: #09090b; /* Zinc-950 */
             color: #e4e4e7;
             font-family: 'Roboto', sans-serif;
-            animation: fadeIn 0.3s ease-out; /* Add animation to custom views */
+            animation: fadeIn 0.3s ease-out; 
         }
         
         #city-girl-view {
-            background-color: #09090b; /* Changed to dark mode for consistency, updating text colors in HTML below */
+            background-color: #09090b; 
         }
 
         /* Custom Scrollbar for Views */
@@ -192,7 +193,8 @@
         #city-girl-view::-webkit-scrollbar,
         #meta-prep-view::-webkit-scrollbar,
         #volatility-matrix-view::-webkit-scrollbar,
-        #reality-tv-view::-webkit-scrollbar { /* Added new view ID */
+        #reality-tv-view::-webkit-scrollbar,
+        #notebook-lm-view::-webkit-scrollbar { 
             width: 8px;
         }
         #advantages-view::-webkit-scrollbar-track,
@@ -205,7 +207,8 @@
         #city-girl-view::-webkit-scrollbar-track,
         #meta-prep-view::-webkit-scrollbar-track,
         #volatility-matrix-view::-webkit-scrollbar-track,
-        #reality-tv-view::-webkit-scrollbar-track { /* Added new view ID */
+        #reality-tv-view::-webkit-scrollbar-track,
+        #notebook-lm-view::-webkit-scrollbar-track { 
             background: #18181b; /* Zinc-900 */
         }
         #advantages-view::-webkit-scrollbar-thumb,
@@ -218,7 +221,8 @@
         #city-girl-view::-webkit-scrollbar-thumb,
         #meta-prep-view::-webkit-scrollbar-thumb,
         #volatility-matrix-view::-webkit-scrollbar-thumb,
-        #reality-tv-view::-webkit-scrollbar-thumb { /* Added new view ID */
+        #reality-tv-view::-webkit-scrollbar-thumb,
+        #notebook-lm-view::-webkit-scrollbar-thumb { 
             background: #FF69B4; /* Neon Pink */
             border-radius: 4px;
         }
@@ -233,7 +237,8 @@
         #renaissance-view h1, #renaissance-view h2, #renaissance-view h3,
         #meta-prep-view h1, #meta-prep-view h2, #meta-prep-view h3,
         #volatility-matrix-view h1, #volatility-matrix-view h2, #volatility-matrix-view h3,
-        #reality-tv-view h1, #reality-tv-view h2, #reality-tv-view h3 { /* Added new view ID */
+        #reality-tv-view h1, #reality-tv-view h2, #reality-tv-view h3,
+        #notebook-lm-view h1, #notebook-lm-view h2, #notebook-lm-view h3 { 
             font-family: 'Oswald', sans-serif;
         }
 
@@ -282,7 +287,7 @@
                         -->
                         <img 
                             id="hero-image"
-                            src="katesurvivor.jpeg" 
+                            src="https://placehold.co/800x533/18181b/FF69B4?text=Tactical+Preparation" 
                             onerror="this.src='https://placehold.co/800x533/000000/FF69B4?text=Add+Landscape+Photo'"
                             alt="Main Player" 
                             class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
@@ -318,14 +323,14 @@
 
         <!-- 3. CONTENT HUBS -->
         <section id="content-hubs" class="bg-black">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl h-full md:h-[70vh]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl h-full md:h-[70vh]">
                 <!-- Card 1 -->
                 <button onclick="openTopic('pregame')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     
                     <div class="relative h-full flex flex-col justify-end p-8 md:p-12 group-hover:translate-y-[-10px] transition-transform duration-500">
-                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
+                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
                             Pregame <br/> Guidelines
                         </h3>
                         <div class="h-1 w-12 bg-neon-pink mt-6 group-hover:w-full transition-all duration-700"></div>
@@ -335,13 +340,29 @@
                     </div>
                 </button>
 
-                <!-- Card 2 -->
-                <button onclick="openTopic('meta')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
+                <!-- NEW Card 2: Survivor NotebookLM -->
+                <button onclick="openTopic('survivornotebook')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     
                     <div class="relative h-full flex flex-col justify-end p-8 md:p-12 group-hover:translate-y-[-10px] transition-transform duration-500">
-                        <h3 class="text-4xl md:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
+                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
+                            Survivor <br/> NotebookLM
+                        </h3>
+                        <div class="h-1 w-12 bg-neon-pink mt-6 group-hover:w-full transition-all duration-700"></div>
+                        <p class="mt-4 text-zinc-400 text-sm tracking-widest uppercase group-hover:text-white">
+                            AI-Powered Research & Note Taking
+                        </p>
+                    </div>
+                </button>
+
+                <!-- Card 3 (Original Card 2) -->
+                <button onclick="openTopic('meta')" class="relative group block w-full h-full border border-zinc-800 hover:border-neon-pink transition-colors duration-500 overflow-hidden bg-zinc-950 text-left focus:outline-none rounded-xl">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    
+                    <div class="relative h-full flex flex-col justify-end p-8 md:p-12 group-hover:translate-y-[-10px] transition-transform duration-500">
+                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight text-white group-hover:text-neon-pink transition-colors font-oswald">
                             META <br/> GAME
                         </h3>
                         <div class="h-1 w-12 bg-neon-pink mt-6 group-hover:w-full transition-all duration-700"></div>
@@ -479,6 +500,55 @@
             </div>
         </div>
     </div>
+
+    <!-- CUSTOM VIEW: NOTEBOOK LM (Survivor NotebookLM) -->
+    <div id="notebook-lm-view">
+        <button onclick="closeNotebookLMView()" class="fixed top-4 left-4 z-50 bg-zinc-900 text-zinc-300 px-4 py-2 rounded shadow-lg uppercase text-xs tracking-widest hover:bg-neon-pink hover:text-black transition-colors border border-zinc-700 hover:border-neon-pink">
+            &larr; Back to Handbook
+        </button>
+        
+        <header class="bg-zinc-950 text-white py-12 shadow-lg border-b-8 border-neon-pink">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-6xl uppercase tracking-wider mb-4 font-oswald"><span class="text-neon-pink">Survivor</span> NotebookLM</h1>
+                <h2 class="text-2xl md:text-3xl font-light tracking-wide text-zinc-400 font-oswald">Your Private Strategy Workspace</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-zinc-500 text-lg">A unified space for analysis, narrative building, and note-taking powered by a connected AI research tool.</p>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto p-8 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl space-y-10">
+                <section>
+                    <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-2 border-neon-pink pb-2">Research Console</h3>
+                    <p class="text-zinc-300 mb-6">
+                        Access your curated research library instantly. Click the card below to open your dedicated NotebookLM space for deep, AI-assisted analysis of past seasons, player strategies, and meta-game mechanics.
+                    </p>
+                    
+                    <a href="https://notebooklm.google.com/notebook/b89282b3-22b0-424e-9647-f2e699a3756f" target="_blank" rel="noopener noreferrer" 
+                       class="group block p-6 bg-black/50 border-2 border-neon-pink rounded-xl text-center hover:bg-neon-pink hover:text-black transition-all duration-300 shadow-xl">
+                        <svg class="w-10 h-10 mx-auto mb-3 text-neon-pink group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h4 class="text-2xl font-oswald font-black uppercase">LINK TO NOTEBOOKLM</h4>
+                        <p class="text-sm uppercase tracking-widest text-zinc-400 group-hover:text-black">Opens in a new tab</p>
+                    </a>
+                </section>
+
+                <section>
+                    <h3 class="text-3xl font-oswald text-white uppercase mb-6 border-b-2 border-neon-pink pb-2">Local Notes & Strategy Outlines</h3>
+                    <p class="text-zinc-300 mb-4">
+                        Use this space for immediate thoughts, final narrative polish, and non-sharable information (like potential final alliance voting arrangements). Note: Content here is saved locally (in the browser) only.
+                    </p>
+                    <textarea 
+                        id="strategy-notes" 
+                        placeholder="Start outlining your FTC speech, tracking potential juror grudges, or perfecting your alliance structure here..."
+                        class="w-full h-64 p-4 text-sm bg-zinc-950 border border-zinc-700 rounded-lg focus:ring-neon-pink focus:border-neon-pink text-white font-mono resize-none"
+                        oninput="saveNotes()"
+                    ></textarea>
+                    <p class="text-xs text-zinc-500 mt-2">Notes saved automatically in your browser's local storage.</p>
+                </section>
+            </div>
+        </main>
+    </div>
+    <!-- END CUSTOM VIEW: NOTEBOOK LM -->
+
 
     <!-- CUSTOM VIEW: ADVANTAGES ENCYCLOPEDIA (Outwit) -->
     <div id="advantages-view">
@@ -1662,7 +1732,7 @@
         // ==========================================
         
         // 1. MAIN HERO IMAGE
-        const HERO_IMAGE_URL = 'katesurvivor.jpeg'; 
+        const HERO_IMAGE_URL = 'https://placehold.co/800x533/18181b/FF69B4?text=Tactical+Preparation'; 
 
         // 2. PORTFOLIO IMAGES
         const PORTFOLIO_ITEMS = [
@@ -1693,6 +1763,22 @@
                         title: 'Suggestions Leading Up to Departure', 
                         description: 'The final countdown. Physical tapering, caloric loading, mental checklists, and last-minute skill acquisition before marooning.', 
                         image: 'https://placehold.co/600x400/000000/FF69B4?text=Departure' 
+                    }
+                ]
+            },
+            'survivornotebook': {
+                title: 'Survivor NotebookLM',
+                subtitle: 'Your personal AI-powered strategic analysis tool for deep pre-game research and narrative refinement.',
+                subTopics: [
+                    { 
+                        title: 'Link to NotebookLM', 
+                        description: 'Open your private, customized research library in a new tab.', 
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=AI+Research' 
+                    },
+                    { 
+                        title: 'Note Taking & Strategy', 
+                        description: 'Dedicated space for outlining your game narrative, preparing confessionals, and tracking player archetypes.', 
+                        image: 'https://placehold.co/600x400/000000/FF69B4?text=Private+Notes' 
                     }
                 ]
             },
@@ -1839,6 +1925,7 @@
             renderTimeline();
             renderPortfolios();
             setupTimelineScroll();
+            loadNotes(); // Load notes on startup
         });
 
         function setupHero() {
@@ -1847,6 +1934,23 @@
                 img.src = HERO_IMAGE_URL;
             }
         }
+
+        // --- LOCAL STORAGE LOGIC ---
+        function saveNotes() {
+            const textarea = document.getElementById('strategy-notes');
+            if (textarea) {
+                // Use localStorage since there is no Firebase setup here
+                localStorage.setItem('notebookLMSurvivorNotes', textarea.value);
+            }
+        }
+
+        function loadNotes() {
+            const textarea = document.getElementById('strategy-notes');
+            if (textarea) {
+                textarea.value = localStorage.getItem('notebookLMSurvivorNotes') || '';
+            }
+        }
+        // ---------------------------
 
         // RENDERING FUNCTIONS
         function renderTimeline() {
@@ -2010,6 +2114,20 @@
             // Clean up the subTopicTitle from JavaScript escaping if necessary
             const cleanedTitle = subTopicTitle.replace(/\\'/g, "'");
 
+            // --- NOTEBOOK LM ---
+            if (topicId === 'survivornotebook') {
+                if (cleanedTitle === 'Link to NotebookLM') {
+                    // Open external link
+                    window.open('https://notebooklm.google.com/notebook/b89282b3-22b0-424e-9647-f2e699a3756f', '_blank');
+                    return;
+                }
+                if (cleanedTitle === 'Note Taking & Strategy') {
+                    openNotebookLMView();
+                    return;
+                }
+            }
+
+
             // --- OUTWIT ---
             if (topicId === 'outwit' && cleanedTitle === 'The Volatility Matrix') {
                 openVolatilityMatrixPage();
@@ -2084,6 +2202,18 @@
         // --- CUSTOM PAGE LOGIC ---
         let chartsInitialized = false;
         
+        function openNotebookLMView() {
+            document.getElementById('topic-view').style.display = 'none';
+            document.getElementById('notebook-lm-view').style.display = 'block';
+            document.getElementById('notebook-lm-view').scrollTop = 0;
+            loadNotes();
+        }
+
+        function closeNotebookLMView() {
+            document.getElementById('notebook-lm-view').style.display = 'none';
+            document.getElementById('topic-view').style.display = 'block';
+        }
+
         function openRealityTVPage() {
             document.getElementById('topic-view').style.display = 'none';
             document.getElementById('reality-tv-view').style.display = 'block';
@@ -2345,10 +2475,6 @@
                     }
                 }
             });
-        }
-    </script>
-</body>
-</html>
         }
     </script>
 </body>
