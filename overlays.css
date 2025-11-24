@@ -1,0 +1,79 @@
+/* ==========================================
+   OVERLAY VIEWS - Topic Details & Custom Pages
+   ========================================== */
+
+/* Topic View Overlay */
+#topic-view {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 50;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom View Pages - Base Styles */
+#advantages-view,
+#preparation-view,
+#renaissance-view,
+#ftc-view,
+#jury-view,
+#panama-view,
+#day1-view,
+#city-girl-view {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 60;
+    overflow-y: auto;
+    background-color: #09090b; /* Zinc-950 */
+    color: #e4e4e7;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Panama Special Background */
+#panama-view {
+    background-color: #020401; /* Deep Jungle Black */
+}
+
+/* Custom Scrollbar for Views */
+#advantages-view::-webkit-scrollbar,
+#preparation-view::-webkit-scrollbar,
+#renaissance-view::-webkit-scrollbar,
+#ftc-view::-webkit-scrollbar,
+#jury-view::-webkit-scrollbar,
+#panama-view::-webkit-scrollbar,
+#day1-view::-webkit-scrollbar,
+#city-girl-view::-webkit-scrollbar {
+    width: 8px;
+}
+
+#advantages-view::-webkit-scrollbar-track,
+#preparation-view::-webkit-scrollbar-track,
+#renaissance-view::-webkit-scrollbar-track,
+#ftc-view::-webkit-scrollbar-track,
+#jury-view::-webkit-scrollbar-track,
+#panama-view::-webkit-scrollbar-track,
+#day1-view::-webkit-scrollbar-track,
+#city-girl-view::-webkit-scrollbar-track {
+    background: #18181b; /* Zinc-900 */
+}
+
+#advantages-view::-webkit-scrollbar-thumb,
+#preparation-view::-webkit-scrollbar-thumb,
+#renaissance-view::-webkit-scrollbar-thumb,
+#ftc-view::-webkit-scrollbar-thumb,
+#jury-view::-webkit-scrollbar-thumb,
+#panama-view::-webkit-scrollbar-thumb,
+#day1-view::-webkit-scrollbar-thumb,
+#city-girl-view::-webkit-scrollbar-thumb {
+    background: #FF69B4; /* Neon Pink */
+    border-radius: 4px;
+}
