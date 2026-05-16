@@ -1,0 +1,602 @@
+/* -------------------------------------------------------------------------
+   The Junkmail Newsletter — long-form article styling
+   ------------------------------------------------------------------------- */
+
+:root {
+  --paper:        #faf7f0;
+  --paper-edge:   #f1ecdf;
+  --ink:          #1a1714;
+  --ink-soft:     #3a342d;
+  --muted:        #6b6358;
+  --rule:         #c8bda0;
+  --rule-soft:    #e6dec9;
+  --accent:       #7a1818;
+  --hand:         #5a3a1f;
+
+  --serif:        'Libre Caslon Text', 'Hoefler Text', 'Garamond', Georgia, serif;
+  --hand-font:    'Caveat', 'Marker Felt', cursive;
+
+  --measure:      36rem;
+  --wide:         52rem;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    radial-gradient(rgba(120, 100, 60, 0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+}
+
+.masthead::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem; right: 1.5rem;
+  bottom: -5px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.masthead-meta span { white-space: nowrap; }
+
+.masthead h1.title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  letter-spacing: -0.01em;
+  margin: 2rem 0 0.4rem;
+  line-height: 1;
+}
+
+.masthead .volume {
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin: 0.6rem 0 0.2rem;
+}
+
+.masthead .place {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0.4rem 0 1rem;
+}
+
+.masthead .tagline {
+  font-family: var(--hand-font);
+  color: var(--hand);
+  font-size: 1.4rem;
+  margin: 0.6rem 0 1.6rem;
+  transform: rotate(-1deg);
+}
+
+.masthead-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.masthead-bottom .dedication { color: var(--ink-soft); }
+
+/* ---------- Table of Contents ---------- */
+
+.toc {
+  max-width: var(--wide);
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.toc h2 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.6rem;
+}
+
+.toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 38rem;
+  columns: 1;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 640px) {
+  .toc ol { columns: 2; column-gap: 3rem; }
+}
+
+.toc li {
+  margin: 0.55rem 0;
+  break-inside: avoid;
+  border-bottom: 1px dotted var(--rule);
+  padding-bottom: 0.35rem;
+  text-align: left;
+}
+
+.toc a {
+  color: var(--ink);
+  text-decoration: none;
+  font-style: italic;
+}
+
+.toc a:hover { color: var(--accent); }
+
+.toc .num {
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 0.55rem;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Article sections ---------- */
+
+.article {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  margin: 5rem auto 4rem;
+  position: relative;
+}
+
+.section + .section { padding-top: 2.5rem; }
+
+.section-rule {
+  width: 4rem;
+  height: 1px;
+  background: var(--ink);
+  margin: 0 auto 2.4rem;
+  border: 0;
+}
+
+.eyebrow {
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+
+.eyebrow .sublabel {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  margin-top: 0.2rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.2vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  text-align: center;
+  margin: 0.4rem auto 0.8rem;
+  max-width: 28rem;
+}
+
+.section h2 em { font-style: italic; color: var(--accent); }
+
+.section h3.dek {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 1rem auto 1.4rem;
+  max-width: 30rem;
+}
+
+.section h3.dek em {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.kicker {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0.6rem auto 1.6rem;
+  max-width: 32rem;
+  line-height: 1.5;
+}
+
+.byline {
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1.4rem 0 0;
+}
+
+.byline strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.intro-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--rule-soft);
+  margin: 2.4rem 0;
+  border: 0;
+}
+
+/* ---------- Paragraphs ---------- */
+
+p {
+  margin: 0 0 1.3rem;
+  font-size: 1.07rem;
+  line-height: 1.72;
+  hyphens: auto;
+}
+
+p strong { font-weight: 700; }
+p em { font-style: italic; }
+
+p a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+p a:hover { color: var(--accent); }
+
+/* Drop cap on the opening paragraph of section I */
+.dropcap::first-letter {
+  font-family: var(--serif);
+  font-weight: 700;
+  float: left;
+  font-size: 4.6em;
+  line-height: 0.85;
+  padding: 0.18em 0.12em 0 0;
+  margin-top: 0.1em;
+  color: var(--accent);
+}
+
+/* ---------- Figures ---------- */
+
+figure {
+  margin: 2.4rem 0;
+  text-align: center;
+}
+
+figure.wide {
+  margin-left: calc(-1 * (var(--wide) - var(--measure)) / 2);
+  margin-right: calc(-1 * (var(--wide) - var(--measure)) / 2);
+  max-width: var(--wide);
+}
+
+@media (max-width: 56rem) {
+  figure.wide { margin-left: 0; margin-right: 0; max-width: 100%; }
+}
+
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  background: var(--paper-edge);
+}
+
+.img-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 22rem;
+  background:
+    linear-gradient(135deg,
+      var(--paper-edge) 25%, transparent 25%,
+      transparent 50%, var(--paper-edge) 50%,
+      var(--paper-edge) 75%, transparent 75%);
+  background-size: 18px 18px;
+  background-color: #ece5d2;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+figcaption {
+  font-style: italic;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0.7rem auto 0;
+  max-width: 28rem;
+  padding: 0 0.5rem;
+}
+
+/* ---------- Pull quotes ---------- */
+
+.pullquote {
+  margin: 2.6rem 0;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  text-align: center;
+}
+
+.pullquote p {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.55rem;
+  line-height: 1.35;
+  margin: 0 auto 0.8rem;
+  max-width: 28rem;
+  color: var(--ink);
+}
+
+.pullquote p strong {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.pullquote cite {
+  display: block;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-family: var(--hand-font);
+  font-size: 1.15rem;
+}
+
+/* ---------- Margin notes ---------- */
+
+.margin-note {
+  font-family: var(--hand-font);
+  color: var(--hand);
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 2rem auto;
+  padding: 0.8rem 1.2rem;
+  max-width: 24rem;
+  text-align: center;
+  transform: rotate(-1deg);
+  border-top: 1px dashed var(--rule);
+  border-bottom: 1px dashed var(--rule);
+}
+
+@media (min-width: 70rem) {
+  .margin-note {
+    position: absolute;
+    right: -16rem;
+    width: 14rem;
+    margin: 0;
+    text-align: left;
+    border: 0;
+    padding: 0;
+    transform: rotate(-3deg);
+  }
+}
+
+/* ---------- At a Glance box ---------- */
+
+.glance {
+  margin: 2.6rem 0;
+  padding: 1.5rem 1.8rem;
+  border: 1px solid var(--ink);
+  background: var(--paper-edge);
+  position: relative;
+}
+
+.glance::before {
+  content: "At a Glance";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 0.8rem;
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.glance table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.glance td {
+  padding: 0.55rem 0;
+  border-bottom: 1px dotted var(--rule);
+  vertical-align: top;
+}
+
+.glance tr:last-child td { border-bottom: 0; }
+
+.glance td:first-child {
+  font-style: italic;
+  color: var(--muted);
+  width: 42%;
+  padding-right: 1rem;
+}
+
+.glance td:last-child {
+  text-align: right;
+  font-weight: 700;
+}
+
+/* ---------- Section IX — Recommendations ---------- */
+
+#section-9 h2 { margin-bottom: 0.4rem; }
+
+.rec {
+  margin: 2.2rem 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.rec:first-of-type { border-top: 0; padding-top: 0; }
+
+.rec h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.45rem;
+  margin: 0 0 0.2rem;
+  line-height: 1.2;
+}
+
+.rec h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 1.6rem 0 0.2rem;
+  line-height: 1.2;
+}
+
+.rec .meta {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0 0 0.7rem;
+}
+
+.rec p {
+  font-size: 1rem;
+  margin: 0 0 0.6rem;
+}
+
+.rec .link {
+  display: inline-block;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  text-decoration: none;
+  padding-bottom: 1px;
+}
+
+.rec .link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.rec.cluster {
+  border: 1px solid var(--rule);
+  padding: 1.2rem 1.4rem 1.4rem;
+  background: rgba(255,255,255,0.4);
+}
+
+.rec.cluster > h3:first-child { margin-top: 0; }
+
+/* ---------- Colophon ---------- */
+
+.colophon {
+  max-width: var(--measure);
+  margin: 5rem auto 4rem;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--ink);
+  text-align: center;
+}
+
+.colophon .mark {
+  font-size: 1.4rem;
+  color: var(--muted);
+  margin: -1.7rem auto 1.4rem;
+  background: var(--paper);
+  width: 2rem;
+}
+
+.colophon .name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.3rem;
+}
+
+.colophon .issue {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+
+.colophon .note {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+/* ---------- Section divider between sections ---------- */
+.section-divider {
+  display: block;
+  text-align: center;
+  margin: 4rem auto;
+  font-size: 1.4rem;
+  color: var(--muted);
+  letter-spacing: 0.6em;
+}
+
+/* ---------- Print ---------- */
+@media print {
+  body { background: white; }
+  .toc, .margin-note { break-inside: avoid; }
+  figure { break-inside: avoid; }
+  .section { break-before: page; }
+}
